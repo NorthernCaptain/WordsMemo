@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/acclst_row_base"
+              android:minHeight="?android:attr/listPreferredItemHeightSmall">
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom">
+    <TextView
+            android:id="@+id/acclst_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+            android:gravity="center_vertical|left"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="Visa card BSpb"
+            android:textColor="@android:color/primary_text_light"
+            android:textColorHighlight="@android:color/primary_text_dark"
+            android:paddingTop="6dp" android:paddingBottom="6dp"></TextView>
+    <TextView
+            android:id="@+id/acclst_amount"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+            android:gravity="center_vertical|right"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="12453,00"
+            android:textColor="@android:color/primary_text_light"
+            android:textColorHighlight="@android:color/primary_text_dark"
+            android:layout_gravity="right" android:paddingTop="6dp" android:paddingBottom="6dp"></TextView>
+    </LinearLayout>
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/passwd_title"
+            android:id="@+id/acclst_comment" android:layout_gravity="left|center_vertical" android:paddingLeft="16dp"
+            android:textSize="10sp" android:textColor="@android:color/holo_blue_dark" android:ellipsize="marquee"/>
+</LinearLayout>

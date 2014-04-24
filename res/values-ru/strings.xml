@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Мой Бю</string>
+    <string name="drawer_open">Open side drawer</string>
+    <string name="drawer_close">Close side drawer</string>
+    <string name="drawer_opened">Выберите действие</string>
+
+    <string name="mi_new_tran">Новый расход</string>
+    <string name="mi_new_income">Новый приход</string>
+    <string name="mi_show_today">За сегодня</string>
+    <string name="mi_categories">Категории</string>
+    <string name="mi_accounts">Счета</string>
+    <string name="mi_budgets">Бюджеты</string>
+
+    <string name="mi_title_expenses">Расходы</string>
+    <string name="mi_title_settings">Настройки</string>
+    <string name="mi_title_views">Представления</string>
+    <string name="passwd_lbl">Введите мастер-пароль</string>
+    <string name="password_nm">Пароль</string>
+    <string name="ok_lbl">OK</string>
+    <string name="passwd_title">Защита доступа</string>
+    <string name="password_verify_lbl">Проверка пароля</string>
+    <string name="passwd_new_lbl">Введите НОВЫЙ пароль</string>
+    <string name="password_too_short">Пароль слишком короткий!</string>
+    <string name="password_differs">Проверка не удалась: пароли не совпадают</string>
+    <string name="password_incorrect">Неверный мастер-пароль, доступ запрещен</string>
+    <string name="account_title_lbl">Мои счета:</string>
+    <string name="account_total_lbl">Итоговая сумма:</string>
+    <string name="version_lbl">Версия:</string>
+    <string name="account_add_new_lbl">Нажмите, что бы добавить счет</string>
+    <string name="accdlg_title_lbl">Название</string>
+    <string name="amount_lbl">Сумма</string>
+    <string name="accdlg_desc_lbl">Описание</string>
+    <string name="accdlg_add_title">Добавить счет</string>
+    <string name="accdlg_edit_title">Изменить счет</string>
+    <string name="delete_confirmation">Удалить запись?</string>
+
+    <string name="mi_title_main">Основные</string>
+    <string name="mi_do_training">Тренировка</string>
+    <string name="mi_do_test">Тест на очки</string>
+    <string name="mi_manage_words">Управление словарем</string>
+
+</resources>

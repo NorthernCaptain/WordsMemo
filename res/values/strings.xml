@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Words Memo</string>
+    <string name="drawer_open">Open side drawer</string>
+    <string name="drawer_close">Close side drawer</string>
+    <string name="drawer_opened">Choose action</string>
+
+    <string name="mi_new_tran">New expense</string>
+    <string name="mi_new_income">New income</string>
+    <string name="mi_show_today">Today\'s records</string>
+    <string name="mi_categories">Categories</string>
+    <string name="mi_accounts">Accounts</string>
+    <string name="mi_budgets">Budgets</string>
+
+    <string name="mi_title_expenses">Expenses</string>
+    <string name="mi_title_settings">Settings</string>
+    <string name="mi_title_views">Views</string>
+    <string name="passwd_lbl">Enter master password</string>
+    <string name="password_nm">Password</string>
+    <string name="ok_lbl">OK</string>
+    <string name="passwd_title">Password protection</string>
+    <string name="password_verify_lbl">Verify password</string>
+    <string name="passwd_new_lbl">Enter NEW password</string>
+    <string name="password_too_short">Password is too short!</string>
+    <string name="password_differs">Verification failed: passwords are not equal.</string>
+    <string name="password_incorrect">Password is invalid, access denied</string>
+    <string name="account_title_lbl">Accounts:</string>
+    <string name="account_total_lbl">Total amount:</string>
+    <string name="version_lbl">Version:</string>
+    <string name="account_add_new_lbl">Click to add New account</string>
+    <string name="accdlg_title_lbl">Title</string>
+    <string name="amount_lbl">Amount</string>
+    <string name="accdlg_desc_lbl">Description</string>
+    <string name="accdlg_add_title">Add new account</string>
+    <string name="accdlg_edit_title">Edit account</string>
+    <string name="delete_confirmation">Delete this record?</string>
+
+    <string name="mi_title_main">Main actions</string>
+    <string name="mi_do_training">Training</string>
+    <string name="mi_do_test">Test with score</string>
+    <string name="mi_manage_words">Manage words</string>
+
+</resources>

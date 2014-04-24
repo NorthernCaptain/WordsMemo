@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/passwd_lbl"
+            android:id="@+id/password_text_lbl" android:textColor="@android:color/holo_blue_dark" android:textSize="20sp"
+            android:padding="5dp"/>
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/password_text" android:password="true" android:layout_margin="10dp"
+            android:singleLine="true"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/password_verify_lbl"
+              android:id="@+id/password_verify_lbl" android:textColor="@android:color/holo_blue_dark" android:textSize="20sp"
+              android:layout_gravity="center|left" android:layout_marginTop="10dp" android:padding="5dp"/>
+    <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/password_verify_text"
+              android:password="true" android:layout_margin="10dp" android:layout_gravity="center|bottom"
+              android:maxLines="1" android:lines="1" android:singleLine="true"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ok_lbl"
+            android:id="@+id/passwd_okbut" android:layout_gravity="right" android:layout_margin="10dp"
+            android:paddingLeft="30dp" android:paddingRight="30dp"/>
+</LinearLayout>

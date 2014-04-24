@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <style name="myHoloBlueLight" parent="@style/_myHoloBlueLight"/>
+
+  <style name="_myHoloBlueLight" parent="Theme.AppCompat.Light">
+
+    <item name="android:editTextStyle">@style/EditTextmyHoloBlueLight</item>
+
+    <item name="android:textColorHighlight">#9933b5e5</item>
+
+    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewmyHoloBlueLight</item>
+
+    <item name="android:checkboxStyle">@style/CheckBoxmyHoloBlueLight</item>
+
+    <item name="android:radioButtonStyle">@style/RadioButtonmyHoloBlueLight</item>
+
+    <item name="android:buttonStyle">@style/ButtonmyHoloBlueLight</item>
+
+    <item name="android:imageButtonStyle">@style/ImageButtonmyHoloBlueLight</item>
+
+    <item name="android:spinnerStyle">@style/SpinnermyHoloBlueLight</item>
+
+    <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemmyHoloBlueLight</item>
+
+    <item name="android:progressBarStyleHorizontal">@style/ProgressBarmyHoloBlueLight</item>
+
+    <item name="android:seekBarStyle">@style/SeekBarmyHoloBlueLight</item>
+
+    <item name="android:buttonStyleToggle">@style/TogglemyHoloBlueLight</item>
+
+    <item name="android:listViewStyle">@style/ListViewmyHoloBlueLight</item>
+
+    <item name="android:listViewWhiteStyle">@style/ListViewmyHoloBlueLight.White</item>
+
+    <item name="android:spinnerItemStyle">@style/SpinnerItemmyHoloBlueLight</item>
+
+  </style>
+
+</resources>
