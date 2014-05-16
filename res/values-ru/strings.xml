@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Мой Бю</string>
+    <string name="app_name">Учим слова</string>
     <string name="drawer_open">Open side drawer</string>
     <string name="drawer_close">Close side drawer</string>
     <string name="drawer_opened">Выберите действие</string>
@@ -8,7 +8,7 @@
     <string name="mi_new_tran">Новый расход</string>
     <string name="mi_new_income">Новый приход</string>
     <string name="mi_show_today">За сегодня</string>
-    <string name="mi_categories">Категории</string>
+    <string name="mi_categories">Тэги - группировка слов</string>
     <string name="mi_accounts">Счета</string>
     <string name="mi_budgets">Бюджеты</string>
 
@@ -40,6 +40,8 @@
     <string name="mi_do_test">Тест на очки</string>
     <string name="mi_manage_words">Управление словарем</string>
     <string name="word_count">Кол-во слов</string>
-    <string name="action_new_tag">New tag</string>
+    <string name="action_new_tag">Создать</string>
+    <string name="words_lbl">Слова:</string>
+    <string name="wordcat_add_new_lbl">Нажмите, что бы добавить слово</string><string name="workedit_word">Слово / Фраза:</string><string name="wordedit_tags">Tags:</string>
 
 </resources>

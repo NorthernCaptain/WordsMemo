@@ -44,16 +44,16 @@ public class SQLManager
     private class Helper extends SQLiteOpenHelper
     {
         private static final String CRE_USERS =
-                "create table users (id integer primary key, name text(64), passwd text(256), comments text, modified datetime)";
+                "create table users (id integer primary key, name text(64), passwd text(256), thesaurus text, modified datetime)";
 
         private static final String INS_USER_DEF =
                 "insert into users (name, passwd) values ('none', '123')";
 
         private static final String CRE_TAGS =
-                "create table tags (id integer primary key, name text(64), user_id integer references users(id), comments text, modified datetime)";
+                "create table tags (id integer primary key, name text(64), user_id integer references users(id), thesaurus text, modified datetime)";
 
         private static final String CRE_WORDS =
-                "create table words (id integer primary key, name text(256), thesaurus text, translation text, lang text(2), trans_lang text(2), status integer default 0, modified datetime)";
+                "create table words (id integer primary key, name text(256), thesaurus text, translation text, lang text(2), trans_lang text(2), status integer default 0, used_times integer default 0, modified datetime)";
 
         private static final String CRE_WORD_TAGS =
                 "create table word_tags (id integer primary key, word_id integer references words(id), tag_id integer references tags(id))";
@@ -71,7 +71,7 @@ public class SQLManager
 
 
         private static final String CRE_CATEGORIES =
-                "create table categories (id integer primary key, name text(64), parent_id integer, type_id integer default 0, comments text, modified datetime)";
+                "create table categories (id integer primary key, name text(64), parent_id integer, type_id integer default 0, thesaurus text, modified datetime)";
 
         private static final String CRE_CAT_INDEX1 =
                 "create index cat_parent_idx on categories(parent_id)";
@@ -83,10 +83,10 @@ public class SQLManager
                 "create index cat_group_group_idx on category_group(group_id)";
 
         private static final String CRE_BUDGETS =
-                "create table budgets (id integer primary key, name text(64), total_amount integer not null, spent integer default 0, start_date datetime, end_date datetime, comments text, modified datetime)";
+                "create table budgets (id integer primary key, name text(64), total_amount integer not null, spent integer default 0, start_date datetime, end_date datetime, thesaurus text, modified datetime)";
 
         private static final String CRE_TRANSACTIONS =
-                "create table transactions (id integer primary key, name text(64), comments text, category_group_id integer references categories(id), "
+                "create table transactions (id integer primary key, name text(64), thesaurus text, category_group_id integer references categories(id), "
                         + "amount integer not null, account_id integer references accounts(id), tran_date datetime not null, type_id integer default 0, "
                         + "person_id integer references people(id), budget_id integer references budgets(id), tran_group integer default 0)";
 

@@ -12,6 +12,8 @@
             android:gravity="bottom"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
+            android:paddingBottom="7dp"
+            android:paddingTop="7dp"
             android:textColor="@android:color/primary_text_light"
             android:textAllCaps="true"
             ></TextView>

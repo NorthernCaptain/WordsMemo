@@ -1,6 +1,7 @@
 package northern.captain.app.WordsMemo;
 
 import android.view.Menu;
+import northern.captain.app.WordsMemo.ui.NavDrawer;
 
 /**
  * Copyright 2013 by Northern Captain Software
@@ -17,4 +18,6 @@ public class AndroidContext
     public MainActivity app;
 
     public Menu mainMenu;
+
+    public NavDrawer drawer;
 }

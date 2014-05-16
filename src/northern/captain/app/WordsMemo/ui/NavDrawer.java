@@ -75,7 +75,10 @@ public class NavDrawer
         switch(items.get(position).id)
         {
             case R.string.mi_categories:
-                openFragment(FragmentFactory.instance().newTagsFragment());
+                setFragment(FragmentFactory.instance().newTagsFragment());
+                break;
+            case R.string.mi_manage_words:
+                setFragment(FragmentFactory.instance().newWordCatFragment());
                 break;
         }
         mDrawerLayout.closeDrawer(Gravity.START);

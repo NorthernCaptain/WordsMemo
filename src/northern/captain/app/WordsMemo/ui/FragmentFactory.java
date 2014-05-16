@@ -35,4 +35,15 @@ public class FragmentFactory
     {
         return new IntroFragment();
     }
+
+    public WordCatalogFragment newWordCatFragment()
+    {
+        return new WordCatalogFragment();
+    }
+
+    public WordEditFragment newWordEditFragment()
+    {
+        return new WordEditFragment();
+    }
+
 }

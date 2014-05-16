@@ -61,5 +61,5 @@
         android:layout_alignRight="@+id/linearLayout"
         android:layout_alignTop="@+id/textViewTitle"
         android:layout_alignBottom="@+id/textViewTitle"
-        android:gravity="center_vertical" />
+        android:gravity="center_vertical" android:paddingRight="5dp"/>
 </RelativeLayout>
