@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import northern.captain.app.WordsMemo.R;
-import northern.captain.app.WordsMemo.factory.AccountFactory;
-import northern.captain.app.WordsMemo.logic.Accounts;
+import northern.captain.app.WordsMemo.factory.TagFactory;
+import northern.captain.app.WordsMemo.logic.Tags;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,50 +18,46 @@ import northern.captain.app.WordsMemo.logic.Accounts;
  * Time: 16:03
  * To change this template use File | Settings | File Templates.
  */
-public class AccountEditDlgFragment extends DialogFragment
+public class TagsEditDialogFragment extends DialogFragment
 {
     public interface IEditCallback
     {
-        public void accountChanged(Accounts account);
-        public void accountCreated(Accounts account);
+        public void tagCreated(Tags account);
+        public void tagChanged(Tags account);
     }
 
     private IEditCallback callback;
 
-    public AccountEditDlgFragment(IEditCallback callback)
+    public TagsEditDialogFragment(IEditCallback callback)
     {
         this.callback = callback;
     }
 
-    public AccountEditDlgFragment(Accounts account, IEditCallback callback)
+    public TagsEditDialogFragment(Tags tags1, IEditCallback callback)
     {
         this.callback = callback;
-        this.account = account;
+        this.tags = tags1;
     }
 
-    Accounts  account;
+    Tags tags;
 
     EditText titleEdit;
     EditText descrEdit;
-    EditText amountEdit;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View v = inflater.inflate(R.layout.account_edit_dlg, container, false);
-        titleEdit = (EditText)v.findViewById(R.id.accdlg_title_val);
-        descrEdit = (EditText)v.findViewById(R.id.accdlg_desc_val);
-        amountEdit = (EditText)v.findViewById(R.id.accdlg_amount_val);
+        titleEdit = (EditText) v.findViewById(R.id.accdlg_title_val);
+        descrEdit = (EditText) v.findViewById(R.id.accdlg_desc_val);
 
-        if(account != null)
+        if (tags != null)
         {
-            titleEdit.setText(account.getName());
-            amountEdit.setText(String.valueOf(account.getAmount()));
-            descrEdit.setText(account.getComments());
+            titleEdit.setText(tags.getName());
+            descrEdit.setText(tags.getComments());
 
             getDialog().setTitle(R.string.accdlg_edit_title);
-        }
-        else
+        } else
         {
             getDialog().setTitle(R.string.accdlg_add_title);
         }
@@ -89,29 +85,28 @@ public class AccountEditDlgFragment extends DialogFragment
 
     private void doOK()
     {
-        boolean isNew = account == null;
+        boolean isNew = tags == null;
         if(isNew)
         {
-            account = AccountFactory.instance().newAccount();
+            tags = TagFactory.instance().newTag();
         }
 
-        account.setName(titleEdit.getText().toString());
-        account.setComments(descrEdit.getText().toString());
-        account.setAmount(Integer.parseInt(amountEdit.getText().toString()));
+        tags.setName(titleEdit.getText().toString());
+        tags.setComments(descrEdit.getText().toString());
 
         if(isNew)
         {
-            AccountFactory.instance().add(account);
+            TagFactory.instance().add(tags);
             if(callback != null)
             {
-                callback.accountCreated(account);
+                callback.tagChanged(tags);
             }
         } else
         {
-            AccountFactory.instance().update(account);
+            TagFactory.instance().update(tags);
             if(callback != null)
             {
-                callback.accountChanged(account);
+                callback.tagCreated(tags);
             }
         }
 

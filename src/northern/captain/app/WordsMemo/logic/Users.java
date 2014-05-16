@@ -8,11 +8,10 @@ package northern.captain.app.WordsMemo.logic;
  * This code is a private property of its owner Northern Captain.
  * Any copying or redistribution of this source code is strictly prohibited.
  */
-public class Accounts
+public class Users
 {
     protected long id;
     protected String name;
-    protected int amount;
     protected String comments;
 
     public long getId()
@@ -33,16 +32,6 @@ public class Accounts
     public void setName(String name)
     {
         this.name = name;
-    }
-
-    public int getAmount()
-    {
-        return amount;
-    }
-
-    public void setAmount(int amount)
-    {
-        this.amount = amount;
     }
 
     public String getComments()

@@ -24,20 +24,22 @@
     <string name="password_too_short">Пароль слишком короткий!</string>
     <string name="password_differs">Проверка не удалась: пароли не совпадают</string>
     <string name="password_incorrect">Неверный мастер-пароль, доступ запрещен</string>
-    <string name="account_title_lbl">Мои счета:</string>
-    <string name="account_total_lbl">Итоговая сумма:</string>
+    <string name="account_title_lbl">Мои тэги:</string>
+    <string name="account_total_lbl">Всего слов:</string>
     <string name="version_lbl">Версия:</string>
-    <string name="account_add_new_lbl">Нажмите, что бы добавить счет</string>
+    <string name="account_add_new_lbl">Нажмите, что бы добавить тэг</string>
     <string name="accdlg_title_lbl">Название</string>
-    <string name="amount_lbl">Сумма</string>
+    <string name="amount_lbl">Слов</string>
     <string name="accdlg_desc_lbl">Описание</string>
-    <string name="accdlg_add_title">Добавить счет</string>
-    <string name="accdlg_edit_title">Изменить счет</string>
+    <string name="accdlg_add_title">Добавить тэг</string>
+    <string name="accdlg_edit_title">Изменить тэг</string>
     <string name="delete_confirmation">Удалить запись?</string>
 
     <string name="mi_title_main">Основные</string>
     <string name="mi_do_training">Тренировка</string>
     <string name="mi_do_test">Тест на очки</string>
     <string name="mi_manage_words">Управление словарем</string>
+    <string name="word_count">Кол-во слов</string>
+    <string name="action_new_tag">New tag</string>
 
 </resources>

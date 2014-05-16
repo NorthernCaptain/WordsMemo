@@ -17,7 +17,8 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_below="@+id/textViewTitle"
-            android:layout_above="@+id/view1">
+            android:layout_above="@+id/view1"
+        android:id="@+id/linearLayout">
         <ListView
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -28,7 +29,7 @@
                 android:background="@android:color/background_light" android:layout_gravity="top"/>
                 />
     </LinearLayout>
-    <View android:id="@+id/view1" android:layout_width="fill_parent" android:layout_height="2dp" android:background="@android:color/holo_blue_dark"
+    <View android:id="@+id/view1" android:layout_width="fill_parent" android:layout_height="2dp" android:background="@color/holoblue"
             android:layout_above="@+id/totalView1"></View>
     <LinearLayout
             android:orientation="horizontal"
@@ -46,9 +47,19 @@
                 android:layout_height="wrap_content"
                 android:text="1233"
                 android:id="@+id/account_total_val" android:layout_gravity="right|top"
-                android:textStyle="bold" android:textColor="@android:color/holo_blue_dark"
+                android:textStyle="bold" android:textColor="@color/holoblue"
                 style="@style/TextAppearance.AppCompat.Widget.Base.DropDownItem" android:gravity="right"
                 android:paddingRight="10dp" android:password="false" android:paddingTop="5dp"
                 android:paddingBottom="5dp" android:paddingLeft="5dp"/>
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/word_count"
+        android:id="@+id/textView"
+        android:layout_alignRight="@+id/linearLayout"
+        android:layout_alignTop="@+id/textViewTitle"
+        android:layout_alignBottom="@+id/textViewTitle"
+        android:gravity="center_vertical" />
 </RelativeLayout>

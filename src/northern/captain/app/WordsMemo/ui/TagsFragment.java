@@ -3,17 +3,15 @@ package northern.captain.app.WordsMemo.ui;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import northern.captain.app.WordsMemo.AndroidContext;
 import northern.captain.app.WordsMemo.R;
-import northern.captain.app.WordsMemo.factory.AccountFactory;
-import northern.captain.app.WordsMemo.logic.Accounts;
+import northern.captain.app.WordsMemo.factory.TagFactory;
+import northern.captain.app.WordsMemo.logic.Tags;
 
 import java.util.List;
 
@@ -24,9 +22,9 @@ import java.util.List;
  * Time: 11:44
  * To change this template use File | Settings | File Templates.
  */
-public class AccountFragment extends Fragment
+public class TagsFragment extends Fragment
 {
-    public AccountFragment()
+    public TagsFragment()
     {
 
     }
@@ -38,7 +36,7 @@ public class AccountFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        items = AccountFactory.instance().getAccounts();
+        items = TagFactory.instance().getTags();
 
         View v = inflater.inflate(R.layout.account_view, container, false);
 
@@ -69,50 +67,73 @@ public class AccountFragment extends Fragment
         });
         totalVal = (TextView)v.findViewById(R.id.account_total_val);
 
+        setHasOptionsMenu(true);
         updateTotal();
-
         return v;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+    {
+        inflater.inflate(R.menu.tagmenu, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.action_new_tag:
+                openNewDialog();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    protected void openNewDialog()
+    {
+        TagsEditDialogFragment dlg = new TagsEditDialogFragment(new TagsEditDialogFragment.IEditCallback()
+        {
+            @Override
+            public void tagCreated(Tags account)
+            {
+                listAdapter.notifyDataSetInvalidated();
+                updateTotal();
+            }
+
+            @Override
+            public void tagChanged(Tags account)
+            {
+                items = TagFactory.instance().getTags();
+                listAdapter.notifyDataSetInvalidated();
+                updateTotal();
+            }
+        });
+
+        dlg.show(AndroidContext.current.app.getSupportFragmentManager(), "account_dialog");
     }
 
     protected void processItemClick(int position)
     {
         if(position >= items.size())
         {
-            AccountEditDlgFragment dlg = new AccountEditDlgFragment(new AccountEditDlgFragment.IEditCallback()
-            {
-                @Override
-                public void accountChanged(Accounts account)
-                {
-                    listAdapter.notifyDataSetInvalidated();
-                    updateTotal();
-                }
-
-                @Override
-                public void accountCreated(Accounts account)
-                {
-                    items = AccountFactory.instance().getAccounts();
-                    listAdapter.notifyDataSetInvalidated();
-                    updateTotal();
-                }
-            });
-
-            dlg.show(AndroidContext.current.app.getSupportFragmentManager(), "account_dialog");
+            openNewDialog();
         } else
         {
-            AccountEditDlgFragment dlg = new AccountEditDlgFragment(items.get(position),
-                    new AccountEditDlgFragment.IEditCallback()
+            TagsEditDialogFragment dlg = new TagsEditDialogFragment(items.get(position),
+                    new TagsEditDialogFragment.IEditCallback()
             {
                 @Override
-                public void accountChanged(Accounts account)
+                public void tagCreated(Tags account)
                 {
                     listAdapter.notifyDataSetInvalidated();
                     updateTotal();
                 }
 
                 @Override
-                public void accountCreated(Accounts account)
+                public void tagChanged(Tags account)
                 {
-                    items = AccountFactory.instance().getAccounts();
+                    items = TagFactory.instance().getTags();
                     listAdapter.notifyDataSetInvalidated();
                     updateTotal();
                 }
@@ -122,9 +143,9 @@ public class AccountFragment extends Fragment
         }
     }
 
-    protected List<Accounts> items;
+    protected List<Tags> items;
 
-    class CustomListAdapter extends ArrayAdapter<Accounts>
+    class CustomListAdapter extends ArrayAdapter<Tags>
     {
 
         public CustomListAdapter(Context context, int textViewResourceId)
@@ -158,7 +179,7 @@ public class AccountFragment extends Fragment
         {
             View v = convertView;
 
-            if(position >= items.size())
+            if (position >= items.size())
             {
                 if (v == null || v.getId() != R.id.acclst_row_add)
                 {
@@ -168,7 +189,7 @@ public class AccountFragment extends Fragment
                 return v;
             }
 
-            Accounts item = items.get(position);
+            Tags item = items.get(position);
 
             if (v == null || v.getId() != R.id.acclst_row_base)
             {
@@ -176,14 +197,14 @@ public class AccountFragment extends Fragment
                 v = vi.inflate(R.layout.accountlist_row, null);
             }
 
-            TextView tv = (TextView)v.findViewById(R.id.acclst_item_name);
+            TextView tv = (TextView) v.findViewById(R.id.acclst_item_name);
             tv.setText(item.getName());
 
-            tv = (TextView)v.findViewById(R.id.acclst_amount);
+            tv = (TextView) v.findViewById(R.id.acclst_amount);
             tv.setText(String.valueOf(item.getAmount()));
 
-            tv = (TextView)v.findViewById(R.id.acclst_comment);
-            if(item.getComments() != null)
+            tv = (TextView) v.findViewById(R.id.acclst_comment);
+            if (item.getComments() != null)
             {
                 tv.setText(item.getComments());
             } else
@@ -199,7 +220,7 @@ public class AccountFragment extends Fragment
     private void updateTotal()
     {
         int total = 0;
-        for(Accounts acc : items)
+        for (Tags acc : items)
         {
             total += acc.getAmount();
         }
@@ -207,7 +228,7 @@ public class AccountFragment extends Fragment
         totalVal.setText(String.valueOf(total));
     }
 
-    private void askForDelete(final Accounts account)
+    private void askForDelete(final Tags tags)
     {
         TwoButtonDialog.newInstance(R.string.delete_confirmation,
                 new TwoButtonDialog.Callback()
@@ -215,7 +236,7 @@ public class AccountFragment extends Fragment
                     @Override
                     public void onPositiveClick()
                     {
-                        doDelete(account);
+                        doDelete(tags);
                     }
 
                     @Override
@@ -226,12 +247,12 @@ public class AccountFragment extends Fragment
     }
 
 
-    private void doDelete(Accounts account)
+    private void doDelete(Tags account)
     {
-        AccountFactory.instance().delete(account);
-        items = AccountFactory.instance().getAccounts();
+        TagFactory.instance().delete(account);
+        items = TagFactory.instance().getTags();
         listAdapter.notifyDataSetInvalidated();
         updateTotal();
     }
-    
+
 }

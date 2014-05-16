@@ -36,15 +36,39 @@ public class SQLManager
 
     private String passwd = "ecrypt";
 
-    private static final String DB_NAME="budwise.db";
+    private static final String DB_NAME="words.db";
     private static final int DB_VERSION = 1;
 
     private Helper helper;
 
     private class Helper extends SQLiteOpenHelper
     {
-        private static final String CRE_ACCOUNTS =
-                "create table accounts (id integer primary key, name text(64), amount integer default 0 not null, comments text, modified datetime)";
+        private static final String CRE_USERS =
+                "create table users (id integer primary key, name text(64), passwd text(256), comments text, modified datetime)";
+
+        private static final String INS_USER_DEF =
+                "insert into users (name, passwd) values ('none', '123')";
+
+        private static final String CRE_TAGS =
+                "create table tags (id integer primary key, name text(64), user_id integer references users(id), comments text, modified datetime)";
+
+        private static final String CRE_WORDS =
+                "create table words (id integer primary key, name text(256), thesaurus text, translation text, lang text(2), trans_lang text(2), status integer default 0, modified datetime)";
+
+        private static final String CRE_WORD_TAGS =
+                "create table word_tags (id integer primary key, word_id integer references words(id), tag_id integer references tags(id))";
+
+        private static final String CRE_WORD_TAGS_INDEX1 =
+                "create index word_tags_idx1 on word_tags(word_id)";
+
+        private static final String CRE_WORD_TAGS_INDEX2 =
+                "create index word_tags_idx2 on word_tags(tag_id)";
+
+
+
+
+
+
 
         private static final String CRE_CATEGORIES =
                 "create table categories (id integer primary key, name text(64), parent_id integer, type_id integer default 0, comments text, modified datetime)";
@@ -61,13 +85,10 @@ public class SQLManager
         private static final String CRE_BUDGETS =
                 "create table budgets (id integer primary key, name text(64), total_amount integer not null, spent integer default 0, start_date datetime, end_date datetime, comments text, modified datetime)";
 
-        private static final String CRE_PEOPLE =
-                "create table people (id integer primary key, name text(64), comments text, modified datetime)";
-
         private static final String CRE_TRANSACTIONS =
                 "create table transactions (id integer primary key, name text(64), comments text, category_group_id integer references categories(id), "
-               +"amount integer not null, account_id integer references accounts(id), tran_date datetime not null, type_id integer default 0, "
-               +"person_id integer references people(id), budget_id integer references budgets(id), tran_group integer default 0)";
+                        + "amount integer not null, account_id integer references accounts(id), tran_date datetime not null, type_id integer default 0, "
+                        + "person_id integer references people(id), budget_id integer references budgets(id), tran_group integer default 0)";
 
         private static final String CRE_TRANS_INDEX1 =
                 "create index tran_date_idx on transactions(tran_date)";
@@ -85,21 +106,15 @@ public class SQLManager
         public void onCreate(SQLiteDatabase db)
         {
             setPassword(db);
-            db.execSQL(CRE_ACCOUNTS);
+            db.execSQL(CRE_USERS);
+            UsersDB.insertDefaultUser(db, Integer.toString(DB_VERSION));
 
-            db.execSQL(CRE_CATEGORIES);
-            db.execSQL(CRE_CAT_INDEX1);
 
-            db.execSQL(CRE_CATEGORY_GROUP);
-            db.execSQL(CRE_CAT_GROUP_INDEX1);
-
-            db.execSQL(CRE_BUDGETS);
-            db.execSQL(CRE_PEOPLE);
-
-            db.execSQL(CRE_TRANSACTIONS);
-            db.execSQL(CRE_TRANS_INDEX1);
-            db.execSQL(CRE_TRANS_INDEX2);
-            db.execSQL(CRE_TRANS_INDEX3);
+            db.execSQL(CRE_TAGS);
+            db.execSQL(CRE_WORDS);
+            db.execSQL(CRE_WORD_TAGS);
+            db.execSQL(CRE_WORD_TAGS_INDEX1);
+            db.execSQL(CRE_WORD_TAGS_INDEX2);
         }
 
         @Override

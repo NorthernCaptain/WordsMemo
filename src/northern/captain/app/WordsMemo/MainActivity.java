@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import northern.captain.app.WordsMemo.db.SQLManager;
-import northern.captain.app.WordsMemo.factory.AccountFactory;
+import northern.captain.app.WordsMemo.factory.TagFactory;
 import northern.captain.app.WordsMemo.ui.FragmentFactory;
 import northern.captain.app.WordsMemo.ui.NavDrawer;
 import northern.captain.tools.MyToast;
@@ -109,6 +111,13 @@ public class MainActivity extends ActionBarActivity
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        AndroidContext.current.mainMenu = menu;
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
         // Pass the event to ActionBarDrawerToggle, if it returns
@@ -132,7 +141,7 @@ public class MainActivity extends ActionBarActivity
         SQLManager.initialize();
         sql = SQLManager.instance();
 
-        AccountFactory.initialize();
+        TagFactory.initialize();
         FragmentFactory.initialize();
 
         drawer.setFragment(FragmentFactory.instance().newIntroFragment());

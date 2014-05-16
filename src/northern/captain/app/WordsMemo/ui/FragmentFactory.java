@@ -26,9 +26,9 @@ public class FragmentFactory
             singleton = new FragmentFactory();
     }
 
-    public AccountFragment newAccountFragment()
+    public TagsFragment newTagsFragment()
     {
-        return new AccountFragment();
+        return new TagsFragment();
     }
 
     public IntroFragment newIntroFragment()

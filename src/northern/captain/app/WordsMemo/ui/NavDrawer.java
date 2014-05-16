@@ -74,8 +74,8 @@ public class NavDrawer
     {
         switch(items.get(position).id)
         {
-            case R.string.mi_accounts:
-                openFragment(FragmentFactory.instance().newAccountFragment());
+            case R.string.mi_categories:
+                openFragment(FragmentFactory.instance().newTagsFragment());
                 break;
         }
         mDrawerLayout.closeDrawer(Gravity.START);

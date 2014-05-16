@@ -1,5 +1,7 @@
 package northern.captain.app.WordsMemo;
 
+import android.view.Menu;
+
 /**
  * Copyright 2013 by Northern Captain Software
  * User: leo
@@ -13,4 +15,6 @@ public class AndroidContext
     public static AndroidContext current;
 
     public MainActivity app;
+
+    public Menu mainMenu;
 }

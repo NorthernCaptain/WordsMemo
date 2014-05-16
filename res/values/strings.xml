@@ -24,20 +24,22 @@
     <string name="password_too_short">Password is too short!</string>
     <string name="password_differs">Verification failed: passwords are not equal.</string>
     <string name="password_incorrect">Password is invalid, access denied</string>
-    <string name="account_title_lbl">Accounts:</string>
-    <string name="account_total_lbl">Total amount:</string>
+    <string name="account_title_lbl">Tags:</string>
+    <string name="account_total_lbl">Total words:</string>
     <string name="version_lbl">Version:</string>
-    <string name="account_add_new_lbl">Click to add New account</string>
+    <string name="account_add_new_lbl">Click to add new Tag</string>
     <string name="accdlg_title_lbl">Title</string>
-    <string name="amount_lbl">Amount</string>
+    <string name="amount_lbl">Words</string>
     <string name="accdlg_desc_lbl">Description</string>
-    <string name="accdlg_add_title">Add new account</string>
-    <string name="accdlg_edit_title">Edit account</string>
+    <string name="accdlg_add_title">Add new tag</string>
+    <string name="accdlg_edit_title">Edit current tag</string>
     <string name="delete_confirmation">Delete this record?</string>
 
     <string name="mi_title_main">Main actions</string>
     <string name="mi_do_training">Training</string>
     <string name="mi_do_test">Test with score</string>
     <string name="mi_manage_words">Manage words</string>
+    <string name="word_count">words</string>
+    <string name="action_new_tag">New tag</string>
 
 </resources>
