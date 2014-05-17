@@ -10,32 +10,36 @@
             android:layout_height="wrap_content"
             android:text="@string/accdlg_title_lbl"
             android:id="@+id/textView" android:layout_gravity="left|center_vertical"
-            android:textColor="@android:color/holo_blue_dark" android:textStyle="bold" android:capitalize="characters"
+            android:textColor="@color/holoblue_dark" android:textStyle="bold"
             android:paddingLeft="5dp" android:paddingTop="5dp"/>
     <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/accdlg_title_val" android:singleLine="true" android:paddingLeft="5dp" android:paddingRight="5dp"/>
+            android:id="@+id/accdlg_title_val" android:singleLine="true" android:paddingLeft="5dp" android:paddingRight="5dp"
+            android:inputType="textCapSentences"/>
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/accdlg_desc_lbl"
               android:id="@+id/textView2" android:layout_gravity="left|center_vertical"
-              android:textColor="@android:color/holo_blue_dark" android:textStyle="bold" android:capitalize="characters"
+              android:textColor="@color/holoblue_dark" android:textStyle="bold"
               android:paddingLeft="5dp" android:paddingTop="5dp"/>
     <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/accdlg_desc_val"
               android:singleLine="false" android:paddingLeft="5dp" android:paddingRight="5dp"
-              android:layout_gravity="left|center_vertical"/>
+              android:layout_gravity="left|center_vertical"
+              android:inputType="textCapSentences"/>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:layout_gravity="center_horizontal|right">
+
+        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@android:string/cancel"
+                android:id="@+id/accdlg_cancel_but" android:layout_gravity="right|center_vertical"
+                android:paddingLeft="20dp" android:paddingRight="20dp"/>
+
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@android:string/ok"
-                android:id="@+id/accdlg_ok_btn" android:layout_gravity="right|center_vertical"
+                android:id="@+id/accdlg_ok_btn"
                 android:paddingLeft="30dp" android:paddingRight="30dp"/>
-        <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@android:string/cancel"
-                android:id="@+id/accdlg_cancel_but" android:layout_gravity="right|center_vertical"
-                android:paddingLeft="20dp" android:paddingRight="20dp"/>
     </LinearLayout>
 </LinearLayout>

@@ -42,6 +42,9 @@
     <string name="word_count">words</string>
     <string name="action_new_tag">Create</string>
     <string name="words_lbl">Words:</string>
-    <string name="wordcat_add_new_lbl">Click to add new Word</string><string name="workedit_word">Word / Phrase:</string><string name="wordedit_tags">Tags:</string>
-
+    <string name="wordcat_add_new_lbl">Click to add new Word</string>
+    <string name="workedit_word">Word / Phrase:</string>
+    <string name="wordedit_tags">Tags:</string>
+    <string name="workedit_translate">Translation:</string>
+    <string name="workedit_thesaurus">Thesaurus:</string>
 </resources>

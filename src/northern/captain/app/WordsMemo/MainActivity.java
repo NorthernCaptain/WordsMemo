@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import northern.captain.app.WordsMemo.db.SQLManager;
+import northern.captain.app.WordsMemo.factory.TTSFactory;
 import northern.captain.app.WordsMemo.factory.TagFactory;
 import northern.captain.app.WordsMemo.factory.WordFactory;
 import northern.captain.app.WordsMemo.ui.FragmentFactory;
@@ -145,6 +146,8 @@ public class MainActivity extends ActionBarActivity
         TagFactory.initialize();
         WordFactory.initialize();
         FragmentFactory.initialize();
+        TTSFactory.initialize();
+        TTSFactory.instance().initEngine();
 
         drawer.setFragment(FragmentFactory.instance().newIntroFragment());
     }
@@ -165,5 +168,12 @@ public class MainActivity extends ActionBarActivity
     {
         super.onPause();
         SQLManager.instance().shutdown();
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+        TTSFactory.instance().shutdown();
+        super.onDestroy();
     }
 }

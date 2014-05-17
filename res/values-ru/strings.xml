@@ -42,6 +42,10 @@
     <string name="word_count">Кол-во слов</string>
     <string name="action_new_tag">Создать</string>
     <string name="words_lbl">Слова:</string>
-    <string name="wordcat_add_new_lbl">Нажмите, что бы добавить слово</string><string name="workedit_word">Слово / Фраза:</string><string name="wordedit_tags">Tags:</string>
+    <string name="wordcat_add_new_lbl">Нажмите, что бы добавить слово</string>
+    <string name="workedit_word">Слово / Фраза:</string>
+    <string name="wordedit_tags">Тэги:</string>
+    <string name="workedit_translate">Перевод:</string>
+    <string name="workedit_thesaurus">Толковый словарь:</string>
 
 </resources>
