@@ -12,8 +12,12 @@ import android.widget.Spinner;
 import northern.captain.app.WordsMemo.R;
 import northern.captain.app.WordsMemo.factory.TTSFactory;
 import northern.captain.app.WordsMemo.factory.WordFactory;
+import northern.captain.app.WordsMemo.logic.Tags;
 import northern.captain.app.WordsMemo.logic.Words;
 import northern.captain.tools.StringUtils;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Copyright 2013 by Northern Captain Software
@@ -33,6 +37,8 @@ public class WordEditFragment extends Fragment
     Spinner  translationTextFmtSpinner;
     Spinner  thesaurusTextFmtSpinner;
 
+    Set<Tags> wordTags = new HashSet<Tags>();
+
     public interface onOKListener
     {
         public void onOK(Words newWord);
@@ -43,6 +49,11 @@ public class WordEditFragment extends Fragment
     public void setOkListener(onOKListener okListener)
     {
         this.okListener = okListener;
+    }
+
+    public WordEditFragment(onOKListener listener)
+    {
+        okListener = listener;
     }
 
     @Override
@@ -81,7 +92,46 @@ public class WordEditFragment extends Fragment
         thesaurusTextFmtSpinner = (Spinner) v.findViewById(R.id.wordedit_thes_type);
         translationTextFmtSpinner = (Spinner) v.findViewById(R.id.wordedit_trans_type);
 
+        ImageButton tagBut = (ImageButton) v.findViewById(R.id.wordedit_tags_but);
+        tagBut.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                TagsSelectorDialogFragment dlg = FragmentFactory.instance().newTagSelectorFragment(wordTags,
+                        new TagsSelectorDialogFragment.IOKCallback()
+                        {
+                            @Override
+                            public void onOK(TagsSelectorDialogFragment dlg)
+                            {
+                                setTagsList();
+                            }
+                        });
+                dlg.show(getFragmentManager(), "tagsChoose");
+            }
+        });
+
+        setTagsList();
+
         return v;
+    }
+
+    protected void setTagsList()
+    {
+        StringBuilder buf = new StringBuilder();
+
+        for(Tags tags : wordTags)
+        {
+            buf.append(tags.toString());
+            buf.append(',');
+        }
+
+        if(buf.length() > 0)
+        {
+            buf.deleteCharAt(buf.length()-1);
+        }
+
+        tagsEdit.setText(buf.toString());
     }
 
     protected void doOK()
@@ -91,13 +141,18 @@ public class WordEditFragment extends Fragment
         if(StringUtils.isNullOrEmpty(wordText))
             return;
 
-        Words word = WordFactory.instance().newWord();
-
         if(okListener != null)
         {
+            Words word = WordFactory.instance().newWord();
+
             word.setName(wordText);
             word.setTranslation(translationEdit.getText().toString().trim());
-            word.setTranslation(thesaurusEdit.getText().toString().trim());
+            word.setThesaurus(thesaurusEdit.getText().toString().trim());
+
+            word.setLang(langSpinner.getSelectedItem().toString());
+
+            word.setFlagBit("Htm".equals(thesaurusTextFmtSpinner.getSelectedItem().toString()) ? Words.FLAG_THESAURUS_IN_HTML : 0);
+            word.setFlagBit("Htm".equals(translationTextFmtSpinner.getSelectedItem().toString()) ? Words.FLAG_TRANSLATION_IN_HTML : 0);
 
             okListener.onOK(word);
         }

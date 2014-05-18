@@ -47,5 +47,5 @@
     <string name="wordedit_tags">Тэги:</string>
     <string name="workedit_translate">Перевод:</string>
     <string name="workedit_thesaurus">Толковый словарь:</string>
-
+    <string name="tags_choose_tags">Выберите тэги:</string>
 </resources>

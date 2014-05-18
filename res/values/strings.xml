@@ -47,4 +47,5 @@
     <string name="wordedit_tags">Tags:</string>
     <string name="workedit_translate">Translation:</string>
     <string name="workedit_thesaurus">Thesaurus:</string>
+    <string name="tags_choose_tags">Choose tags:</string>
 </resources>

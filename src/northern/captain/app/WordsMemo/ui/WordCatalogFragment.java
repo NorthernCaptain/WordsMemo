@@ -96,7 +96,21 @@ public class WordCatalogFragment extends Fragment
 
     protected void openAddNew()
     {
-        AndroidContext.current.drawer.openFragment(FragmentFactory.instance().newWordEditFragment());
+        AndroidContext.current.drawer.openFragment(FragmentFactory.instance().newWordEditFragment(new WordEditFragment.onOKListener()
+        {
+            @Override
+            public void onOK(Words newWord)
+            {
+                WordFactory.instance().add(newWord);
+                reloadWords();
+                listAdapter.notifyDataSetInvalidated();
+            }
+        }));
+    }
+
+    protected void reloadWords()
+    {
+        items = WordFactory.instance().getWords();
     }
 
     protected void askForDelete(final Words words)

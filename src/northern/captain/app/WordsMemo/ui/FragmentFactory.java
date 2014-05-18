@@ -1,5 +1,9 @@
 package northern.captain.app.WordsMemo.ui;
 
+import northern.captain.app.WordsMemo.logic.Tags;
+
+import java.util.Set;
+
 /**
  * Created with IntelliJ IDEA.
  * User: NorthernCaptain
@@ -41,9 +45,10 @@ public class FragmentFactory
         return new WordCatalogFragment();
     }
 
-    public WordEditFragment newWordEditFragment()
+    public WordEditFragment newWordEditFragment(WordEditFragment.onOKListener listener)
     {
-        return new WordEditFragment();
+        return new WordEditFragment(listener);
     }
 
+    public TagsSelectorDialogFragment newTagSelectorFragment(Set<Tags> selected, TagsSelectorDialogFragment.IOKCallback callback) { return new TagsSelectorDialogFragment(selected, callback);}
 }

@@ -16,6 +16,8 @@ public class Words
     protected String translation;
     protected int    usedTimes = 0;
     protected int    status = 0;
+    protected String lang;
+    protected String transLang;
 
     public static final int FLAG_TRANSLATION_IN_HTML = 1;
     public static final int FLAG_THESAURUS_IN_HTML = 2;
@@ -101,5 +103,25 @@ public class Words
     public void resetFlagBit(int flagBit)
     {
         flags &= ~flagBit;
+    }
+
+    public String getLang()
+    {
+        return lang;
+    }
+
+    public void setLang(String lang)
+    {
+        this.lang = lang;
+    }
+
+    public String getTransLang()
+    {
+        return transLang;
+    }
+
+    public void setTransLang(String transLang)
+    {
+        this.transLang = transLang;
     }
 }

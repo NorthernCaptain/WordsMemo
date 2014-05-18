@@ -50,7 +50,7 @@ public class SQLManager
                 "insert into users (name, passwd) values ('none', '123')";
 
         private static final String CRE_TAGS =
-                "create table tags (id integer primary key, name text(64), user_id integer references users(id), thesaurus text, modified datetime)";
+                "create table tags (id integer primary key, name text(64), user_id integer references users(id), comments text, modified datetime)";
 
         private static final String CRE_WORDS =
                 "create table words (id integer primary key, name text(256), thesaurus text, translation text, lang text(2),"

@@ -48,4 +48,27 @@ public class Tags
     {
         this.comments = comments;
     }
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if(o instanceof Tags)
+        {
+            Tags tags = (Tags)o;
+            return id == tags.id;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString()
+    {
+        return name;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return name.hashCode();
+    }
 }
