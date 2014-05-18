@@ -5,7 +5,7 @@
         <item>RU</item>
     </string-array>
     <string-array name="texttype_arr">
-        <item>Text</item>
-        <item>Html</item>
+        <item>Txt</item>
+        <item>Htm</item>
     </string-array>
 </resources>

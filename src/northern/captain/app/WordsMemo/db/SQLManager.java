@@ -53,7 +53,8 @@ public class SQLManager
                 "create table tags (id integer primary key, name text(64), user_id integer references users(id), thesaurus text, modified datetime)";
 
         private static final String CRE_WORDS =
-                "create table words (id integer primary key, name text(256), thesaurus text, translation text, lang text(2), trans_lang text(2), status integer default 0, used_times integer default 0, modified datetime)";
+                "create table words (id integer primary key, name text(256), thesaurus text, translation text, lang text(2),"
+               +" trans_lang text(2), status integer default 0, used_times integer default 0, modified datetime, flags integer default 0)";
 
         private static final String CRE_WORD_TAGS =
                 "create table word_tags (id integer primary key, word_id integer references words(id), tag_id integer references tags(id))";

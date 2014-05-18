@@ -23,6 +23,7 @@ public class WordsDB extends Words implements ICRUD
     public static final String DBF_USED_TIMES = "used_times";
     public static final String DBF_STATUS = "status";
     public static final String DBF_MODIFIED = "modified";
+    public static final String DBF_FLAGS = "flags";
 
     @Override
     public long insert()
@@ -35,6 +36,7 @@ public class WordsDB extends Words implements ICRUD
         values.put(DBF_TRANSLATION, translation);
         values.put(DBF_STATUS, status);
         values.put(DBF_MODIFIED, SQLManager.getCDate());
+        values.put(DBF_FLAGS, flags);
 
         id = db.insert(TBL_WORDS, null, values);
 
@@ -52,6 +54,7 @@ public class WordsDB extends Words implements ICRUD
         values.put(DBF_TRANSLATION, translation);
         values.put(DBF_STATUS, status);
         values.put(DBF_USED_TIMES, usedTimes);
+        values.put(DBF_FLAGS, flags);
         values.put(DBF_MODIFIED, SQLManager.getCDate());
 
         db.update(TBL_WORDS, values, DBF_ID + " = ?", new String[] { String.valueOf(id)});
@@ -74,6 +77,7 @@ public class WordsDB extends Words implements ICRUD
         translation = cur.getString(cur.getColumnIndex(DBF_TRANSLATION));
         usedTimes = cur.getInt(cur.getColumnIndex(DBF_USED_TIMES));
         status = cur.getInt(cur.getColumnIndex(DBF_STATUS));
+        flags = cur.getInt(cur.getColumnIndex(DBF_FLAGS));
     }
 
     @Override

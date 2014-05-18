@@ -17,6 +17,10 @@ public class Words
     protected int    usedTimes = 0;
     protected int    status = 0;
 
+    public static final int FLAG_TRANSLATION_IN_HTML = 1;
+    public static final int FLAG_THESAURUS_IN_HTML = 2;
+    protected int    flags = 0;
+
 
     public int getStatus()
     {
@@ -82,5 +86,20 @@ public class Words
     {
         usedTimes++;
         return usedTimes;
+    }
+
+    public boolean isFlagSet(int flagBit)
+    {
+        return (flags & flagBit) == flagBit;
+    }
+
+    public void setFlagBit(int flagBit)
+    {
+        flags |= flagBit;
+    }
+
+    public void resetFlagBit(int flagBit)
+    {
+        flags &= ~flagBit;
     }
 }

@@ -16,18 +16,31 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" android:layout_gravity="center">
         <EditText
-                android:layout_width="0dp"
+                android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/wordedit_word_entry" android:layout_weight="1" android:maxLines="3" android:lines="1"
+                android:id="@+id/wordedit_word_entry"
+                android:layout_weight="1" android:maxLines="3" android:lines="3"
                 android:linksClickable="true"
                 android:inputType="textMultiLine"/>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+        <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:entries="@array/lang_arr"
+                android:id="@+id/wordedit_lang_spin"
+                android:spinnerMode="dropdown"/>
         <ImageButton
                 android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/wordedit_say_but" android:src="@drawable/ic_action_volume_on"
                 android:clickable="true"
                 android:contentDescription="@string/words_lbl"
                 android:cropToPadding="false"/>
+        </LinearLayout>
     </LinearLayout>
     <TextView
             android:layout_width="wrap_content"
@@ -44,7 +57,7 @@
                 android:layout_height="fill_parent"
                 android:id="@+id/wordedit_tags_entry" android:layout_weight="1" android:maxLines="3" android:lines="1"
                 android:linksClickable="true"
-                android:inputType="text"/>
+                android:inputType="none" android:editable="false"/>
         <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
@@ -80,7 +93,8 @@
             <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
-                    android:id="@+id/wordedit_trans_but" android:src="@drawable/ic_action_labels"
+                    android:id="@+id/wordedit_trans_but"
+                    android:src="@drawable/ic_action_import_export"
                     android:clickable="true"
                     android:contentDescription="@string/wordedit_tags"/>
             <Spinner
@@ -119,7 +133,8 @@
             <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
-                    android:id="@+id/wordedit_thes_but" android:src="@drawable/ic_action_labels"
+                    android:id="@+id/wordedit_thes_but"
+                    android:src="@drawable/ic_action_import_export"
                     android:clickable="true"
                     android:contentDescription="@string/wordedit_tags"/>
             <Spinner
@@ -144,7 +159,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@android:string/ok"
-                android:id="@+id/accdlg_ok_btn"
+                android:id="@+id/wordedit_ok_btn"
                 android:paddingLeft="30dp" android:paddingRight="30dp"/>
     </LinearLayout>
 </LinearLayout>
