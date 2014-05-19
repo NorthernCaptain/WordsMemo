@@ -5,11 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import northern.captain.app.WordsMemo.db.TagsDB;
 import northern.captain.app.WordsMemo.db.SQLManager;
 import northern.captain.app.WordsMemo.logic.Tags;
+import northern.captain.tools.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Copyright 2013 by Northern Captain Software
@@ -41,6 +39,36 @@ public class TagFactory
     public Tags newTag()
     {
         return new TagsDB();
+    }
+
+
+    public Set<Tags> getTagsIn(Set<Integer> tagIds)
+    {
+        Set<Tags> tagsList = new HashSet<Tags>();
+
+        if(tagIds.size() == 0)
+            return tagsList;
+
+        SQLiteDatabase db = SQLManager.instance().dbr();
+
+        String query = "SELECT * from " + TagsDB.TBL_TAGS + " where id in ("
+                + StringUtils.collectionToString(tagIds) + ")";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                TagsDB tagsDB = new TagsDB();
+                tagsDB.read(cursor);
+                tagsList.add(tagsDB);
+            } while(cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        return tagsList;
     }
 
 

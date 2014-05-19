@@ -111,27 +111,19 @@ public class WordEditFragment extends Fragment
             }
         });
 
-        setTagsList();
+        setValues();
 
         return v;
     }
 
+    protected void setValues()
+    {
+        setTagsList();
+    }
+
     protected void setTagsList()
     {
-        StringBuilder buf = new StringBuilder();
-
-        for(Tags tags : wordTags)
-        {
-            buf.append(tags.toString());
-            buf.append(',');
-        }
-
-        if(buf.length() > 0)
-        {
-            buf.deleteCharAt(buf.length()-1);
-        }
-
-        tagsEdit.setText(buf.toString());
+        tagsEdit.setText(StringUtils.collectionToString(wordTags));
     }
 
     protected void doOK()
@@ -153,6 +145,8 @@ public class WordEditFragment extends Fragment
 
             word.setFlagBit("Htm".equals(thesaurusTextFmtSpinner.getSelectedItem().toString()) ? Words.FLAG_THESAURUS_IN_HTML : 0);
             word.setFlagBit("Htm".equals(translationTextFmtSpinner.getSelectedItem().toString()) ? Words.FLAG_TRANSLATION_IN_HTML : 0);
+
+            word.setTags(this.wordTags);
 
             okListener.onOK(word);
         }

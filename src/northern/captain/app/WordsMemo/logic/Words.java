@@ -1,5 +1,7 @@
 package northern.captain.app.WordsMemo.logic;
 
+import java.util.Set;
+
 /**
  * Copyright 2013 by Northern Captain Software
  * User: leo
@@ -18,6 +20,8 @@ public class Words
     protected int    status = 0;
     protected String lang;
     protected String transLang;
+
+    protected Set<Tags> tags = null;
 
     public static final int FLAG_TRANSLATION_IN_HTML = 1;
     public static final int FLAG_THESAURUS_IN_HTML = 2;
@@ -124,4 +128,15 @@ public class Words
     {
         this.transLang = transLang;
     }
+
+    public void setTags(Set<Tags> tags)
+    {
+        this.tags = tags;
+    }
+
+    public Set<Tags> getTags()
+    {
+        return tags;
+    }
+
 }
