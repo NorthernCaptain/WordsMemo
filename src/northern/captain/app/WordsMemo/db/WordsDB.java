@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import northern.captain.app.WordsMemo.factory.TagFactory;
+import northern.captain.app.WordsMemo.logic.TagSet;
 import northern.captain.app.WordsMemo.logic.Tags;
 import northern.captain.app.WordsMemo.logic.Words;
 
@@ -109,7 +110,7 @@ public class WordsDB extends Words implements ICRUD
     }
 
     @Override
-    public void setTags(Set<Tags> tags)
+    public void setTags(TagSet tags)
     {
         this.tags = tags;
 
@@ -153,7 +154,7 @@ public class WordsDB extends Words implements ICRUD
         return tagIds;
     }
 
-    public Set<Tags> getTags()
+    public TagSet getTags()
     {
         if(tags != null)
             return tags;

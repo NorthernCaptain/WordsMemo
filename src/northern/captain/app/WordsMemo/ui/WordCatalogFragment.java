@@ -80,7 +80,7 @@ public class WordCatalogFragment extends Fragment
         switch (item.getItemId())
         {
             case R.id.action_new_tag:
-                openAddNew();
+                openAddNew(null);
                 return true;
         }
         return super.onOptionsItemSelected(item);    //To change body of overridden methods use File | Settings | File Templates.
@@ -88,24 +88,29 @@ public class WordCatalogFragment extends Fragment
 
     protected void processItemClick(int position)
     {
-        if(position >= items.size())
-        {
-            openAddNew();
-        }
+        openAddNew(position >= items.size() ? null : items.get(position));
     }
 
-    protected void openAddNew()
+    protected void openAddNew(Words editWord)
     {
         AndroidContext.current.drawer.openFragment(FragmentFactory.instance().newWordEditFragment(new WordEditFragment.onOKListener()
         {
             @Override
-            public void onOK(Words newWord)
+            public void onOK(Words newWord, boolean update)
             {
-                WordFactory.instance().add(newWord);
-                reloadWords();
-                listAdapter.notifyDataSetInvalidated();
+                if(update)
+                {
+                    WordFactory.instance().update(newWord);
+                    listAdapter.notifyDataSetChanged();
+                }
+                else
+                {
+                    WordFactory.instance().add(newWord);
+                    reloadWords();
+                    listAdapter.notifyDataSetInvalidated();
+                }
             }
-        }));
+        }, editWord));
     }
 
     protected void reloadWords()

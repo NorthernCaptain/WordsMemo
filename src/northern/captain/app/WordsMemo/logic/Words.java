@@ -21,11 +21,14 @@ public class Words
     protected String lang;
     protected String transLang;
 
-    protected Set<Tags> tags = null;
+    protected TagSet tags = null;
 
     public static final int FLAG_TRANSLATION_IN_HTML = 1;
     public static final int FLAG_THESAURUS_IN_HTML = 2;
     protected int    flags = 0;
+
+    public static final String HTML_FMT = "Htm";
+    public static final String TEXT_FMT = "Txt";
 
 
     public int getStatus()
@@ -129,12 +132,12 @@ public class Words
         this.transLang = transLang;
     }
 
-    public void setTags(Set<Tags> tags)
+    public void setTags(TagSet tags)
     {
         this.tags = tags;
     }
 
-    public Set<Tags> getTags()
+    public TagSet getTags()
     {
         return tags;
     }

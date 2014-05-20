@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,9 +31,9 @@ public class NavDrawer
 {
     ActionBarDrawerToggle mDrawerToggle;
     DrawerLayout          mDrawerLayout;
-    Activity              activity;
+    ActionBarActivity     activity;
 
-    public NavDrawer(Activity activity, DrawerLayout drawerLayout, ActionBarDrawerToggle toggle)
+    public NavDrawer(ActionBarActivity activity, DrawerLayout drawerLayout, ActionBarDrawerToggle toggle)
     {
         this.mDrawerLayout = drawerLayout;
         this.mDrawerToggle = toggle;
@@ -82,6 +83,7 @@ public class NavDrawer
                 break;
         }
         mDrawerLayout.closeDrawer(Gravity.START);
+        activity.getSupportActionBar().setSubtitle(items.get(position).id);
     }
 
     class CustomListAdapter extends ArrayAdapter<DrawerItem>

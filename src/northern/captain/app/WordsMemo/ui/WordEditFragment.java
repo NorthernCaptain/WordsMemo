@@ -5,13 +5,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.Spinner;
+import android.widget.*;
 import northern.captain.app.WordsMemo.R;
 import northern.captain.app.WordsMemo.factory.TTSFactory;
 import northern.captain.app.WordsMemo.factory.WordFactory;
+import northern.captain.app.WordsMemo.logic.TagSet;
 import northern.captain.app.WordsMemo.logic.Tags;
 import northern.captain.app.WordsMemo.logic.Words;
 import northern.captain.tools.StringUtils;
@@ -37,11 +35,13 @@ public class WordEditFragment extends Fragment
     Spinner  translationTextFmtSpinner;
     Spinner  thesaurusTextFmtSpinner;
 
-    Set<Tags> wordTags = new HashSet<Tags>();
+    TagSet wordTags = new TagSet();
+
+    Words  current;
 
     public interface onOKListener
     {
-        public void onOK(Words newWord);
+        public void onOK(Words newWord, boolean editMode);
     }
 
     protected onOKListener okListener;
@@ -51,9 +51,10 @@ public class WordEditFragment extends Fragment
         this.okListener = okListener;
     }
 
-    public WordEditFragment(onOKListener listener)
+    public WordEditFragment(onOKListener listener, Words words)
     {
         okListener = listener;
+        current = words;
     }
 
     @Override
@@ -62,7 +63,7 @@ public class WordEditFragment extends Fragment
         View v = inflater.inflate(R.layout.word_edit_view, container, false);
 
         wordEdit = (EditText) v.findViewById(R.id.wordedit_word_entry);
-        ImageButton sayBut = (ImageButton)v.findViewById(R.id.wordedit_say_but);
+        ImageButton sayBut = (ImageButton) v.findViewById(R.id.wordedit_say_but);
         sayBut.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -80,6 +81,16 @@ public class WordEditFragment extends Fragment
             public void onClick(View view)
             {
                 doOK();
+                getFragmentManager().popBackStack();
+            }
+        });
+
+        Button  cancelBut = (Button) v.findViewById(R.id.wordedit_cancel_but);
+        cancelBut.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
                 getFragmentManager().popBackStack();
             }
         });
@@ -118,12 +129,59 @@ public class WordEditFragment extends Fragment
 
     protected void setValues()
     {
+        if(current != null)
+        {
+            wordEdit.setText(current.getName());
+            translationEdit.setText(current.getTranslation());
+            thesaurusEdit.setText(current.getThesaurus());
+
+            {
+                SpinnerAdapter adapter = langSpinner.getAdapter();
+                for (int i = 0; i < adapter.getCount();i++)
+                {
+                    if(current.getLang().equals(adapter.getItem(i).toString()))
+                    {
+                        langSpinner.setSelection(i);
+                        break;
+                    }
+                }
+            }
+
+            {
+                SpinnerAdapter adapter = thesaurusTextFmtSpinner.getAdapter();
+                String fmt = current.isFlagSet(Words.FLAG_THESAURUS_IN_HTML) ? Words.HTML_FMT : Words.TEXT_FMT;
+                for (int i = 0; i < adapter.getCount();i++)
+                {
+                    if(fmt.equals(adapter.getItem(i).toString()))
+                    {
+                        thesaurusTextFmtSpinner.setSelection(i);
+                        break;
+                    }
+                }
+            }
+
+            {
+                SpinnerAdapter adapter = translationTextFmtSpinner.getAdapter();
+                String fmt = current.isFlagSet(Words.FLAG_TRANSLATION_IN_HTML) ? Words.HTML_FMT : Words.TEXT_FMT;
+                for (int i = 0; i < adapter.getCount();i++)
+                {
+                    if(fmt.equals(adapter.getItem(i).toString()))
+                    {
+                        translationTextFmtSpinner.setSelection(i);
+                        break;
+                    }
+                }
+            }
+
+            wordTags.clear();
+            wordTags.addAll(current.getTags());
+        }
         setTagsList();
     }
 
     protected void setTagsList()
     {
-        tagsEdit.setText(StringUtils.collectionToString(wordTags));
+        tagsEdit.setText(wordTags.toString());
     }
 
     protected void doOK()
@@ -135,7 +193,7 @@ public class WordEditFragment extends Fragment
 
         if(okListener != null)
         {
-            Words word = WordFactory.instance().newWord();
+            Words word = current != null ? current : WordFactory.instance().newWord();
 
             word.setName(wordText);
             word.setTranslation(translationEdit.getText().toString().trim());
@@ -143,12 +201,12 @@ public class WordEditFragment extends Fragment
 
             word.setLang(langSpinner.getSelectedItem().toString());
 
-            word.setFlagBit("Htm".equals(thesaurusTextFmtSpinner.getSelectedItem().toString()) ? Words.FLAG_THESAURUS_IN_HTML : 0);
-            word.setFlagBit("Htm".equals(translationTextFmtSpinner.getSelectedItem().toString()) ? Words.FLAG_TRANSLATION_IN_HTML : 0);
+            word.setFlagBit(Words.HTML_FMT.equals(thesaurusTextFmtSpinner.getSelectedItem().toString()) ? Words.FLAG_THESAURUS_IN_HTML : 0);
+            word.setFlagBit(Words.HTML_FMT.equals(translationTextFmtSpinner.getSelectedItem().toString()) ? Words.FLAG_TRANSLATION_IN_HTML : 0);
 
             word.setTags(this.wordTags);
 
-            okListener.onOK(word);
+            okListener.onOK(word, word == current);
         }
     }
 

@@ -1,6 +1,7 @@
 package northern.captain.app.WordsMemo.ui;
 
 import northern.captain.app.WordsMemo.logic.Tags;
+import northern.captain.app.WordsMemo.logic.Words;
 
 import java.util.Set;
 
@@ -45,9 +46,9 @@ public class FragmentFactory
         return new WordCatalogFragment();
     }
 
-    public WordEditFragment newWordEditFragment(WordEditFragment.onOKListener listener)
+    public WordEditFragment newWordEditFragment(WordEditFragment.onOKListener listener, Words editWord)
     {
-        return new WordEditFragment(listener);
+        return new WordEditFragment(listener, editWord);
     }
 
     public TagsSelectorDialogFragment newTagSelectorFragment(Set<Tags> selected, TagsSelectorDialogFragment.IOKCallback callback) { return new TagsSelectorDialogFragment(selected, callback);}

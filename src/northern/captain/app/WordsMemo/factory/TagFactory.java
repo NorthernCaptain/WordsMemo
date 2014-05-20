@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import northern.captain.app.WordsMemo.db.TagsDB;
 import northern.captain.app.WordsMemo.db.SQLManager;
+import northern.captain.app.WordsMemo.logic.TagSet;
 import northern.captain.app.WordsMemo.logic.Tags;
 import northern.captain.tools.StringUtils;
 
@@ -42,9 +43,9 @@ public class TagFactory
     }
 
 
-    public Set<Tags> getTagsIn(Set<Integer> tagIds)
+    public TagSet getTagsIn(Set<Integer> tagIds)
     {
-        Set<Tags> tagsList = new HashSet<Tags>();
+        TagSet tagsList = new TagSet();
 
         if(tagIds.size() == 0)
             return tagsList;
