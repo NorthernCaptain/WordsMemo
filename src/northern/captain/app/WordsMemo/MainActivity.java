@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import northern.captain.app.WordsMemo.db.SQLManager;
 import northern.captain.app.WordsMemo.factory.TTSFactory;
 import northern.captain.app.WordsMemo.factory.TagFactory;
@@ -175,5 +173,23 @@ public class MainActivity extends ActionBarActivity
     {
         TTSFactory.instance().shutdown();
         super.onDestroy();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent e)
+    {
+        if (keyCode == KeyEvent.KEYCODE_MENU)
+        {
+            if(mDrawerLayout.isDrawerOpen(Gravity.START))
+            {
+                mDrawerLayout.closeDrawer(Gravity.START);
+            }
+            else
+            {
+                mDrawerLayout.openDrawer(Gravity.START);
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, e);
     }
 }
