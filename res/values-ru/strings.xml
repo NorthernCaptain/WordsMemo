@@ -48,4 +48,6 @@
     <string name="workedit_translate">Перевод:</string>
     <string name="workedit_thesaurus">Толковый словарь:</string>
     <string name="tags_choose_tags">Выберите тэги:</string>
+    <string name="test_name">Название теста:</string>
+    <string name="test_setup_title">Параметры теста:</string>
 </resources>

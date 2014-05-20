@@ -1,6 +1,5 @@
 package northern.captain.app.WordsMemo.ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -73,6 +72,7 @@ public class NavDrawer
 
     private void itemClicked(int position)
     {
+        activity.getSupportActionBar().setSubtitle(items.get(position).id);
         switch(items.get(position).id)
         {
             case R.string.mi_categories:
@@ -81,9 +81,11 @@ public class NavDrawer
             case R.string.mi_manage_words:
                 setFragment(FragmentFactory.instance().newWordCatFragment());
                 break;
+            case R.string.mi_do_training:
+                setFragment(FragmentFactory.instance().newTestSetupFragment(null));
+                break;
         }
         mDrawerLayout.closeDrawer(Gravity.START);
-        activity.getSupportActionBar().setSubtitle(items.get(position).id);
     }
 
     class CustomListAdapter extends ArrayAdapter<DrawerItem>

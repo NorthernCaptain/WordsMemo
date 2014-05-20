@@ -48,4 +48,6 @@
     <string name="workedit_translate">Translation:</string>
     <string name="workedit_thesaurus">Thesaurus:</string>
     <string name="tags_choose_tags">Choose tags:</string>
+    <string name="test_name">Test name:</string>
+    <string name="test_setup_title">Test parameters:</string>
 </resources>

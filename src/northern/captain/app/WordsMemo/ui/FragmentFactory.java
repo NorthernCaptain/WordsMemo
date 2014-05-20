@@ -52,4 +52,9 @@ public class FragmentFactory
     }
 
     public TagsSelectorDialogFragment newTagSelectorFragment(Set<Tags> selected, TagsSelectorDialogFragment.IOKCallback callback) { return new TagsSelectorDialogFragment(selected, callback);}
+
+    public TestSetupFragment newTestSetupFragment(TestSetupFragment.onOKListener listener)
+    {
+        return new TestSetupFragment(listener);
+    }
 }

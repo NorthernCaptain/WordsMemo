@@ -192,4 +192,9 @@ public class MainActivity extends ActionBarActivity
         }
         return super.onKeyDown(keyCode, e);
     }
+
+    public DrawerLayout getmDrawerLayout()
+    {
+        return mDrawerLayout;
+    }
 }
