@@ -61,7 +61,16 @@ public class TrainingFragment extends Fragment
             @Override
             public void onClick(View view)
             {
+                setValues(session.getCurrentWord(), true);
+            }
+        });
+        translateOrThesaurusBut.setOnLongClickListener(new View.OnLongClickListener()
+        {
+            @Override
+            public boolean onLongClick(View view)
+            {
                 switchThesaurus();
+                return true;
             }
         });
         translateOrThesaurusBut.setImageResource(session.isShowThesaurus() ? R.drawable.ic_action_web_site : R.drawable.ic_action_import_export);
@@ -85,6 +94,15 @@ public class TrainingFragment extends Fragment
             }
         });
 
+        transView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                setValues(session.getCurrentWord(), true);
+            }
+        });
+
         session.init();
         doNext();
 
@@ -105,7 +123,7 @@ public class TrainingFragment extends Fragment
     {
         session.setShowThesaurus(!session.isShowThesaurus());
         translateOrThesaurusBut.setImageResource(session.isShowThesaurus() ? R.drawable.ic_action_web_site : R.drawable.ic_action_import_export);
-        setValues(session.getCurrentWord());
+        setValues(session.getCurrentWord(), true);
     }
 
     private void doBack()
@@ -123,7 +141,7 @@ public class TrainingFragment extends Fragment
             word = session.nextWord();
         }
 
-        setValues(word);
+        setValues(word, false);
 
         if(session.isNeedTalk())
         {
@@ -131,15 +149,21 @@ public class TrainingFragment extends Fragment
         }
     }
 
-    private void setValues(Words word)
+    private void setValues(Words word, boolean showTranslation)
     {
         if(word == null)
             return;
 
-        wordView.loadData(StringUtils.toHtmlH2(word.getName()), "text/html", null);
+        wordView.loadDataWithBaseURL(null, StringUtils.toHtmlH1(word.getName()), "text/html", "UTF-8", null);
 
         String translation;
         int captionId;
+
+        if(!showTranslation)
+        {
+            transView.loadDataWithBaseURL(null, StringUtils.toHtmlH2(""), "text/html", "UTF-8", null);
+            return;
+        }
 
         boolean isHtml = false;
         if(session.isShowThesaurus())
@@ -147,7 +171,7 @@ public class TrainingFragment extends Fragment
             translation = word.getThesaurus();
             isHtml = word.isFlagSet(Words.FLAG_THESAURUS_IN_HTML);
             captionId = R.string.workedit_thesaurus;
-            if(translation == null)
+            if(StringUtils.isNullOrEmpty(translation))
             {
                 translation = word.getTranslation();
                 isHtml = word.isFlagSet(Words.FLAG_TRANSLATION_IN_HTML);
@@ -158,7 +182,7 @@ public class TrainingFragment extends Fragment
             translation = word.getTranslation();
             isHtml = word.isFlagSet(Words.FLAG_TRANSLATION_IN_HTML);
             captionId = R.string.workedit_translate;
-            if(translation == null)
+            if(StringUtils.isNullOrEmpty(translation))
             {
                 translation = word.getThesaurus();
                 isHtml = word.isFlagSet(Words.FLAG_THESAURUS_IN_HTML);
@@ -167,6 +191,7 @@ public class TrainingFragment extends Fragment
         }
 
         this.transLbl.setText(captionId);
-        transView.loadData(StringUtils.toHtml(translation), "text/html", null);
+
+        transView.loadDataWithBaseURL(null, StringUtils.toHtmlH2(translation), "text/html", "UTF-8", null);
     }
 }

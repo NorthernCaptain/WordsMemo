@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.*;
 import northern.captain.app.WordsMemo.AndroidContext;
 import northern.captain.app.WordsMemo.R;
-import northern.captain.app.WordsMemo.logic.TrainingParams;
 import northern.captain.app.WordsMemo.logic.TrainingSession;
 
 import java.util.ArrayList;
@@ -78,18 +77,26 @@ public class NavDrawer
         switch(items.get(position).id)
         {
             case R.string.mi_categories:
-                setFragment(FragmentFactory.instance().newTagsFragment());
+                openFragment(FragmentFactory.instance().newTagsFragment());
                 break;
             case R.string.mi_manage_words:
-                setFragment(FragmentFactory.instance().newWordCatFragment());
+                openFragment(FragmentFactory.instance().newWordCatFragment());
                 break;
             case R.string.mi_do_training:
-                setFragment(FragmentFactory.instance().newTestSetupFragment(new TestSetupFragment.onOKListener()
+                openFragment(FragmentFactory.instance().newTestSetupFragment(new TestSetupFragment.onOKListener()
                 {
                     @Override
-                    public void onOK(TrainingSession params)
+                    public void onOK(final TrainingSession params)
                     {
-                        setFragment(FragmentFactory.instance().newTrainingFragment(params));
+                        activity.getSupportFragmentManager().popBackStack();
+                        AndroidContext.current.mainHandler.postDelayed(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                openFragment(FragmentFactory.instance().newTrainingFragment(params));
+                            }
+                        }, 100);
                     }
                 }));
                 break;
@@ -198,7 +205,7 @@ public class NavDrawer
         FragmentManager fragmentManager = AndroidContext.current.app.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-        fragmentTransaction.replace(R.id.content_frame, fragment, fragment.toString());
+        fragmentTransaction.replace(R.id.content_frame, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

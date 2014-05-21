@@ -44,17 +44,17 @@ public class SQLManager
     private class Helper extends SQLiteOpenHelper
     {
         private static final String CRE_USERS =
-                "create table users (id integer primary key, name text(64), passwd text(256), thesaurus text, modified datetime)";
+                "create table users (id integer primary key, name text(64), passwd text(256), thesaurus text, modified datetime, host_id integer)";
 
         private static final String INS_USER_DEF =
                 "insert into users (name, passwd) values ('none', '123')";
 
         private static final String CRE_TAGS =
-                "create table tags (id integer primary key, name text(64), user_id integer references users(id), comments text, modified datetime)";
+                "create table tags (id integer primary key, name text(64), user_id integer references users(id), comments text, modified datetime, host_id integer)";
 
         private static final String CRE_WORDS =
                 "create table words (id integer primary key, name text(256), thesaurus text, translation text, lang text(2),"
-               +" trans_lang text(2), status integer default 0, used_times integer default 0, modified datetime, flags integer default 0)";
+               +" trans_lang text(2), status integer default 0, used_times integer default 0, modified datetime, flags integer default 0, host_id integer)";
 
         private static final String CRE_WORD_TAGS =
                 "create table word_tags (id integer primary key, word_id integer references words(id), tag_id integer references tags(id))";

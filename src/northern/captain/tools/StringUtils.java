@@ -1,7 +1,6 @@
 package northern.captain.tools;
 
 import java.util.Collection;
-import java.util.Set;
 
 /**
  * Copyright 2013 by Northern Captain Software
@@ -78,5 +77,10 @@ public class StringUtils
     public static String toHtmlH2(String text)
     {
         return HTML_PRE + "<h2>" + text + "</h2>" + HTML_POST;
+    }
+
+    public static String toHtmlH1(String text)
+    {
+        return HTML_PRE + "<h1>" + text + "</h1>" + HTML_POST;
     }
 }

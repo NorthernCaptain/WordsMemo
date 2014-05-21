@@ -2,6 +2,7 @@ package northern.captain.app.WordsMemo;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -51,6 +52,8 @@ public class MainActivity extends ActionBarActivity
         drawer = new NavDrawer(this, mDrawerLayout, mDrawerToggle);
         AndroidContext.current.drawer = drawer;
         initDrawer();
+
+        AndroidContext.current.mainHandler = new Handler(getMainLooper());
 
         initialize();
     }

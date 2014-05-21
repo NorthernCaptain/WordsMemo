@@ -12,11 +12,11 @@
             android:gravity="bottom"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:paddingBottom="7dp"
-            android:paddingTop="7dp"
+            android:paddingBottom="10dp"
             android:textColor="@android:color/primary_text_light"
             android:textAllCaps="true"
-            ></TextView>
+            android:paddingTop="10dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
     <View android:id="@+id/drl_title_line" android:layout_height="2dp" android:layout_width="match_parent"
             android:background="@android:color/darker_gray"></View>
 </LinearLayout>

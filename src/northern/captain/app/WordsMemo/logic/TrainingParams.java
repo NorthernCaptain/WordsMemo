@@ -16,7 +16,7 @@ public class TrainingParams
     protected boolean needTalk = false;
     protected String  mainLang;
 
-    protected boolean showThesaurus = true;
+    protected boolean showThesaurus = false;
 
     public boolean isShowThesaurus()
     {

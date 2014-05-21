@@ -16,7 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/training_word_web"
-        android:layout_margin="5dp" />
+        android:layout_margin="5dp"
+        android:background="@android:color/background_light"/>
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
@@ -40,8 +41,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/training_translate_web"
-        android:background="@drawable/holorect"
-        android:layout_margin="5dp" />
+        android:background="@android:color/background_light"
+        android:layout_margin="5dp"
+        android:clickable="true"/>
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
@@ -65,7 +67,8 @@
             android:id="@+id/training_trans_but"
             android:src="@drawable/ic_action_import_export"
             android:padding="15dp"
-            android:contentDescription="@string/ok_lbl"/>
+            android:contentDescription="@string/ok_lbl"
+            android:longClickable="true"/>
 
         <ImageButton
             android:layout_width="0px"
