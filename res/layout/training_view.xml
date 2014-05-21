@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_weight="2"
+        android:layout_height="0px"
+        android:background="@drawable/holorect"
+        android:layout_margin="3dp"
+        >
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/training_word_web"
+        android:layout_margin="5dp" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/workedit_translate"
+        android:id="@+id/training_translate_lbl"
+        android:textColor="@color/holoblue_dark"
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="5dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_weight="3"
+        android:layout_height="0px"
+        android:background="@drawable/holorect"
+        android:layout_margin="3dp"
+        >
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/training_translate_web"
+        android:background="@drawable/holorect"
+        android:layout_margin="5dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:layout_gravity="bottom"
+        android:layout_margin="2dp">
+
+        <ImageButton
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/training_say_but"
+            android:src="@drawable/ic_action_volume_on"
+            android:padding="15dp"
+            android:contentDescription="@string/ok_lbl" />
+
+        <ImageButton
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/training_trans_but"
+            android:src="@drawable/ic_action_import_export"
+            android:padding="15dp"
+            android:contentDescription="@string/ok_lbl"/>
+
+        <ImageButton
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/training_back_but"
+            android:padding="15dp"
+            android:src="@drawable/ic_action_reply"
+            android:contentDescription="@string/ok_lbl"/>
+
+        <ImageButton
+            android:layout_width="0px"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:id="@+id/training_next_but"
+            android:src="@drawable/ic_action_forward"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:longClickable="true"
+            android:clickable="true"
+            android:contentDescription="@string/ok_lbl"
+            android:layout_gravity="right" />
+
+    </LinearLayout>
+
+</LinearLayout>

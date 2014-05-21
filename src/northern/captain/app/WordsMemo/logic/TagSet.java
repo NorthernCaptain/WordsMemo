@@ -28,6 +28,24 @@ public class TagSet extends HashSet<Tags>
         return jar.toString();
     }
 
+    public String id2SQL()
+    {
+        StringBuilder buf = new StringBuilder();
+        int count = 0;
+        int siz = size();
+        for(Tags tag : this)
+        {
+            buf.append(tag.getId());
+            count++;
+            if(count < siz)
+            {
+                buf.append(',');
+            }
+        }
+
+        return buf.toString();
+    }
+
     /**
      * Converts JSON array of ids into Tags and fills this set.
      * @param json

@@ -60,4 +60,23 @@ public class StringUtils
 
         return buf.toString();
     }
+
+    private static final String HTML_PRE = "<!DOCTYPE html>\n" +
+            "<html>\n" +
+            "<body>\n" +
+            "<div align=\"center\">\n";
+    private static final String HTML_POST =
+            "</div>\n" +
+            "</body>\n" +
+            "</html>";
+
+    public static String toHtml(String text)
+    {
+        return HTML_PRE + text + HTML_POST;
+    }
+
+    public static String toHtmlH2(String text)
+    {
+        return HTML_PRE + "<h2>" + text + "</h2>" + HTML_POST;
+    }
 }

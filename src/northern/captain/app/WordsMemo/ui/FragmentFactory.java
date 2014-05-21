@@ -1,6 +1,8 @@
 package northern.captain.app.WordsMemo.ui;
 
 import northern.captain.app.WordsMemo.logic.Tags;
+import northern.captain.app.WordsMemo.logic.TrainingParams;
+import northern.captain.app.WordsMemo.logic.TrainingSession;
 import northern.captain.app.WordsMemo.logic.Words;
 
 import java.util.Set;
@@ -56,5 +58,10 @@ public class FragmentFactory
     public TestSetupFragment newTestSetupFragment(TestSetupFragment.onOKListener listener)
     {
         return new TestSetupFragment(listener);
+    }
+
+    public TrainingFragment newTrainingFragment(TrainingSession params)
+    {
+        return new TrainingFragment(params);
     }
 }

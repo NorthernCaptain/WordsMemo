@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.*;
 import northern.captain.app.WordsMemo.AndroidContext;
 import northern.captain.app.WordsMemo.R;
+import northern.captain.app.WordsMemo.logic.TrainingParams;
+import northern.captain.app.WordsMemo.logic.TrainingSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +84,14 @@ public class NavDrawer
                 setFragment(FragmentFactory.instance().newWordCatFragment());
                 break;
             case R.string.mi_do_training:
-                setFragment(FragmentFactory.instance().newTestSetupFragment(null));
+                setFragment(FragmentFactory.instance().newTestSetupFragment(new TestSetupFragment.onOKListener()
+                {
+                    @Override
+                    public void onOK(TrainingSession params)
+                    {
+                        setFragment(FragmentFactory.instance().newTrainingFragment(params));
+                    }
+                }));
                 break;
         }
         mDrawerLayout.closeDrawer(Gravity.START);

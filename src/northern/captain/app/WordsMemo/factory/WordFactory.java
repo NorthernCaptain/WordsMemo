@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import northern.captain.app.WordsMemo.db.SQLManager;
 import northern.captain.app.WordsMemo.db.WordsDB;
+import northern.captain.app.WordsMemo.logic.TagSet;
 import northern.captain.app.WordsMemo.logic.Words;
 
 import java.util.ArrayList;
@@ -76,6 +77,61 @@ public class WordFactory
         });
 
         return wordsList;
+    }
+
+    public List<Long> getIdsByTags(TagSet tags)
+    {
+        List<Long> wordsList = new ArrayList<Long>();
+
+        SQLiteDatabase db = SQLManager.instance().dbr();
+
+        String query;
+
+        if(tags == null || tags.isEmpty())
+        {
+            query = "SELECT id from " + WordsDB.TBL_WORDS;
+        } else
+        {
+            query = "SELECT words.id from words join word_tags on words.id = word_tags.word_id WHERE word_tags.tag_id in ("
+                    + tags.id2SQL() + ")";
+        }
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst())
+        {
+            do
+            {
+                Long id = cursor.getLong(0);
+                wordsList.add(id);
+            } while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        return wordsList;
+    }
+
+    public Words getById(long id)
+    {
+        SQLiteDatabase db = SQLManager.instance().dbr();
+
+        String query = "SELECT * from " + WordsDB.TBL_WORDS + " WHERE id = " + id;
+
+        Cursor cursor = db.rawQuery(query, null);
+        try
+        {
+            if (cursor.moveToFirst())
+            {
+                WordsDB wordsDB = new WordsDB();
+                wordsDB.read(cursor);
+                return wordsDB;
+            }
+        }
+        finally
+        {
+            cursor.close();
+        }
+        return null;
     }
 
     public void add(Words account)

@@ -13,6 +13,7 @@ import northern.captain.app.WordsMemo.AndroidContext;
 import northern.captain.app.WordsMemo.R;
 import northern.captain.app.WordsMemo.logic.TagSet;
 import northern.captain.app.WordsMemo.logic.TrainingParams;
+import northern.captain.app.WordsMemo.logic.TrainingSession;
 import northern.captain.tools.StringUtils;
 
 /**
@@ -38,7 +39,7 @@ public class TestSetupFragment extends Fragment
 
     public interface onOKListener
     {
-        public void onOK(TrainingParams params);
+        public void onOK(TrainingSession params);
     }
 
     protected onOKListener okListener;
@@ -122,7 +123,7 @@ public class TestSetupFragment extends Fragment
 
     protected void setValues()
     {
-        testNameEdit.setText("Test-" + testCount++);
+        testNameEdit.setText("Training-" + testCount++);
         wordTags.clear();
 
         sayBut.setImageResource(needSay ? R.drawable.ic_action_volume_on : R.drawable.ic_action_volume_muted);
@@ -144,7 +145,7 @@ public class TestSetupFragment extends Fragment
 
         if(okListener != null)
         {
-            TrainingParams params = new TrainingParams(testNameEdit.getText().toString());
+            TrainingSession params = new TrainingSession(testNameEdit.getText().toString());
             params.setNeedTalk(needSay);
             params.setMainLang(langSpinner.getSelectedItem().toString());
             params.setTags(this.wordTags);

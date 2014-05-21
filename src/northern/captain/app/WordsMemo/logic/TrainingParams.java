@@ -16,6 +16,18 @@ public class TrainingParams
     protected boolean needTalk = false;
     protected String  mainLang;
 
+    protected boolean showThesaurus = true;
+
+    public boolean isShowThesaurus()
+    {
+        return showThesaurus;
+    }
+
+    public void setShowThesaurus(boolean showThesaurus)
+    {
+        this.showThesaurus = showThesaurus;
+    }
+
     public TrainingParams(String name)
     {
         this.name = name;
