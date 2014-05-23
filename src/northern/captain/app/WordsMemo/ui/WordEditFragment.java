@@ -10,6 +10,7 @@ import northern.captain.app.WordsMemo.R;
 import northern.captain.app.WordsMemo.factory.TTSFactory;
 import northern.captain.app.WordsMemo.factory.WordFactory;
 import northern.captain.app.WordsMemo.logic.TagSet;
+import northern.captain.app.WordsMemo.logic.ThesaurusRetrieverFactory;
 import northern.captain.app.WordsMemo.logic.Words;
 import northern.captain.tools.StringUtils;
 
@@ -34,6 +35,7 @@ public class WordEditFragment extends Fragment
 
     Words current;
     ImageButton changeTransBut;
+    ImageButton transBut;
 
     boolean inTransMode = true;
 
@@ -131,6 +133,17 @@ public class WordEditFragment extends Fragment
             }
         });
 
+        transBut = (ImageButton) v.findViewById(R.id.wordedit_trans_but);
+
+        transBut.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                askThesaurus();
+            }
+        });
+
         setValues();
 
         return v;
@@ -141,6 +154,29 @@ public class WordEditFragment extends Fragment
 
     String thesaurusText;
     int thesaurusFmtIdx;
+
+
+    private void askThesaurus()
+    {
+        String word = wordEdit.getText().toString().trim();
+        if(StringUtils.isNullOrEmpty(word))
+            return;
+
+        String definition = ThesaurusRetrieverFactory.instance().getThesaurus().getDefinition(word);
+
+        if(!StringUtils.isNullOrEmpty(definition))
+        {
+            thesaurusText = definition;
+            if(inTransMode)
+            {
+                changeTransMode();
+            } else
+            {
+                showTransMode();
+            }
+        }
+    }
+
 
     private void openTagSelector()
     {

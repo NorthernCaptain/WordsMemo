@@ -2,11 +2,9 @@ package northern.captain.app.WordsMemo.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import northern.captain.app.WordsMemo.AndroidContext;
@@ -104,6 +102,16 @@ public class TrainingFragment extends Fragment
         });
 
         transView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                setValues(session.getCurrentWord(), true);
+            }
+        });
+
+        View lay = v.findViewById(R.id.training_lay);
+        lay.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)

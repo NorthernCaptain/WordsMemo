@@ -20,9 +20,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:id="@+id/wordedit_word_entry"
-                android:layout_weight="1" android:maxLines="3" android:lines="3"
+                android:layout_weight="1"
                 android:linksClickable="true"
-                android:inputType="textMultiLine"/>
+                android:inputType="textMultiLine|textCapSentences"/>
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_weight="0"
@@ -82,9 +82,9 @@
         <EditText
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
-                android:id="@+id/wordedit_trans_entry" android:layout_weight="1" android:maxLines="3" android:lines="3"
+                android:id="@+id/wordedit_trans_entry" android:layout_weight="1"
                 android:linksClickable="true"
-                android:inputType="text|textMultiLine"
+                android:inputType="text|textMultiLine|textCapSentences"
                 />
 
         <LinearLayout

@@ -32,21 +32,32 @@
         android:layout_marginLeft="5dp" />
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_weight="3"
         android:layout_height="0px"
-        android:background="@drawable/holorect"
+        android:layout_gravity="center_horizontal"
         android:layout_margin="3dp"
+        android:gravity="center"
+        android:background="@drawable/holorect"
+        android:id="@+id/training_lay"
         >
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/training_translate_web"
-        android:background="@android:color/background_light"
-        android:layout_margin="5dp"
-        android:clickable="true"
-        android:gravity="center_vertical|center_horizontal" />
+        <ScrollView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_margin="3dp"
+                android:id="@+id/scrollView"
+                android:layout_gravity="center"
+                >
+            <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/training_translate_web"
+                    android:layout_margin="5dp"
+                    android:clickable="true"
+                    android:gravity="center_vertical|center_horizontal" />
+
+        </ScrollView>
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
