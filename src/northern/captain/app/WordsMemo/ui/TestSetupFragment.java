@@ -92,6 +92,14 @@ public class TestSetupFragment extends Fragment
         });
 
         tagsEdit = (EditText) v.findViewById(R.id.tsetup_tags_entry);
+        tagsEdit.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                openTagSelector();
+            }
+        });
 
         langSpinner = (Spinner) v.findViewById(R.id.tsetup_lang_spin);
 
@@ -101,16 +109,7 @@ public class TestSetupFragment extends Fragment
             @Override
             public void onClick(View view)
             {
-                TagsSelectorDialogFragment dlg = FragmentFactory.instance().newTagSelectorFragment(wordTags,
-                        new TagsSelectorDialogFragment.IOKCallback()
-                        {
-                            @Override
-                            public void onOK(TagsSelectorDialogFragment dlg)
-                            {
-                                setTagsList();
-                            }
-                        });
-                dlg.show(getFragmentManager(), "tagsChoose");
+                openTagSelector();
             }
         });
 
@@ -119,6 +118,20 @@ public class TestSetupFragment extends Fragment
         setValues();
 
         return v;
+    }
+
+    private void openTagSelector()
+    {
+        TagsSelectorDialogFragment dlg = FragmentFactory.instance().newTagSelectorFragment(wordTags,
+                new TagsSelectorDialogFragment.IOKCallback()
+                {
+                    @Override
+                    public void onOK(TagsSelectorDialogFragment dlg)
+                    {
+                        setTagsList();
+                    }
+                });
+        dlg.show(getFragmentManager(), "tagsChoose");
     }
 
     protected void setValues()

@@ -57,7 +57,8 @@
                 android:layout_height="fill_parent"
                 android:id="@+id/tsetup_tags_entry" android:layout_weight="1" android:maxLines="3" android:lines="1"
                 android:linksClickable="true"
-                android:inputType="none" android:editable="false"/>
+                android:inputType="none" android:editable="false"
+            android:clickable="true" />
         <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"

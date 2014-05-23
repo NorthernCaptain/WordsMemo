@@ -12,12 +12,14 @@
         android:background="@drawable/holorect"
         android:layout_margin="3dp"
         >
-    <WebView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/training_word_web"
         android:layout_margin="5dp"
-        android:background="@android:color/background_light"/>
+        android:background="@android:color/background_light"
+        android:gravity="center_vertical|center_horizontal"
+        android:clickable="true" />
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
@@ -37,13 +39,14 @@
         android:background="@drawable/holorect"
         android:layout_margin="3dp"
         >
-    <WebView
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/training_translate_web"
         android:background="@android:color/background_light"
         android:layout_margin="5dp"
-        android:clickable="true"/>
+        android:clickable="true"
+        android:gravity="center_vertical|center_horizontal" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"

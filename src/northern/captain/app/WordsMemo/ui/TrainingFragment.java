@@ -2,6 +2,7 @@ package northern.captain.app.WordsMemo.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,8 +22,8 @@ import northern.captain.tools.StringUtils;
  */
 public class TrainingFragment extends Fragment
 {
-    protected WebView  wordView;
-    protected WebView  transView;
+    protected TextView  wordView;
+    protected TextView  transView;
     protected TextView transLbl;
 
     protected ImageButton sayBut;
@@ -42,8 +43,16 @@ public class TrainingFragment extends Fragment
     {
         View v = inflater.inflate(R.layout.training_view, container, false);
 
-        wordView = (WebView) v.findViewById(R.id.training_word_web);
-        transView = (WebView) v.findViewById(R.id.training_translate_web);
+        wordView = (TextView) v.findViewById(R.id.training_word_web);
+        wordView.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                doNext();
+            }
+        });
+        transView = (TextView) v.findViewById(R.id.training_translate_web);
         transLbl = (TextView) v.findViewById(R.id.training_translate_lbl);
 
         sayBut = (ImageButton) v.findViewById(R.id.training_say_but);
@@ -154,14 +163,14 @@ public class TrainingFragment extends Fragment
         if(word == null)
             return;
 
-        wordView.loadDataWithBaseURL(null, StringUtils.toHtmlH1(word.getName()), "text/html", "UTF-8", null);
+        wordView.setText(StringUtils.toTextHtmlH1(word.getName()));
 
         String translation;
         int captionId;
 
         if(!showTranslation)
         {
-            transView.loadDataWithBaseURL(null, StringUtils.toHtmlH2(""), "text/html", "UTF-8", null);
+            transView.setText("");
             return;
         }
 
@@ -192,6 +201,6 @@ public class TrainingFragment extends Fragment
 
         this.transLbl.setText(captionId);
 
-        transView.loadDataWithBaseURL(null, StringUtils.toHtmlH2(translation), "text/html", "UTF-8", null);
+        transView.setText(StringUtils.toTextHtmlH2(translation));
     }
 }

@@ -1,5 +1,8 @@
 package northern.captain.tools;
 
+import android.text.Html;
+import android.text.Spanned;
+
 import java.util.Collection;
 
 /**
@@ -83,4 +86,7 @@ public class StringUtils
     {
         return HTML_PRE + "<h1>" + text + "</h1>" + HTML_POST;
     }
+
+    public static Spanned toTextHtmlH1(String text) { return Html.fromHtml("<h1>" + text + "</h1>");};
+    public static Spanned toTextHtmlH2(String text) { return Html.fromHtml("<h2>" + text + "</h2>");};
 }

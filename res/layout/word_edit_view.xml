@@ -14,7 +14,8 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" android:layout_gravity="center">
+            android:layout_height="0px" android:layout_gravity="center"
+            android:layout_weight="1">
         <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -57,7 +58,8 @@
                 android:layout_height="fill_parent"
                 android:id="@+id/wordedit_tags_entry" android:layout_weight="1" android:maxLines="3" android:lines="1"
                 android:linksClickable="true"
-                android:inputType="none" android:editable="false"/>
+                android:inputType="none" android:editable="false"
+            android:clickable="true" />
         <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
@@ -70,12 +72,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/workedit_translate"
-            android:id="@+id/textView111" android:layout_gravity="center_vertical|left" android:layout_marginLeft="5dp"
+            android:id="@+id/wordedit_trans_lbl" android:layout_gravity="center_vertical|left" android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp" android:textColor="@color/holoblue_dark" android:textStyle="bold"/>
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0px"
+            android:layout_weight="2">
         <EditText
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
@@ -94,9 +97,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:id="@+id/wordedit_trans_but"
-                    android:src="@drawable/ic_action_import_export"
+                    android:src="@drawable/ic_action_download"
                     android:clickable="true"
                     android:contentDescription="@string/wordedit_tags"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wordedit_change_trans_but"
+                android:src="@drawable/ic_action_import_export" />
+
             <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -106,7 +116,7 @@
 
     </LinearLayout>
 
-    <TextView
+    <!--TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/workedit_thesaurus"
@@ -144,7 +154,7 @@
                     android:id="@+id/wordedit_thes_type"/>
         </LinearLayout>
 
-    </LinearLayout>
+    </LinearLayout-->
 
     <LinearLayout
             android:orientation="horizontal"
