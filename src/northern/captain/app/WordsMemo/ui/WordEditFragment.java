@@ -293,6 +293,7 @@ public class WordEditFragment extends Fragment
         translationText = "";
         thesaurusFmtIdx = 0;
         translationFmtIdx = 0;
+        webView.setText("");
         showTransMode();
         setTagsList();
     }
