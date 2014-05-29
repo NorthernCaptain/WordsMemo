@@ -49,5 +49,16 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_word_lbl"
+            android:id="@+id/new_word"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginTop="190dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp" />
+
     </LinearLayout>
+
 </LinearLayout>

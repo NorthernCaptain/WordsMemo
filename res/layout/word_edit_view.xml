@@ -79,14 +79,49 @@
             android:layout_width="match_parent"
             android:layout_height="0px"
             android:layout_weight="2">
-        <EditText
-                android:layout_width="0dp"
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/wordedit_frame_lay">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="3dp"
+                android:gravity="center"
+                android:background="@drawable/holorectwhite"
+                android:id="@+id/wordedit_web_lay"
+                >
+                <ScrollView
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_margin="3dp"
+                    android:id="@+id/wordedit_scroll_web"
+                    android:layout_gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/wordedit_translate_web"
+                        android:layout_margin="5dp"
+                        android:clickable="true"
+                        android:gravity="center_vertical|center_horizontal" />
+
+                </ScrollView>
+            </LinearLayout>
+
+            <EditText
+                android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:id="@+id/wordedit_trans_entry" android:layout_weight="1"
+                android:padding="10dp"
+                android:id="@+id/wordedit_trans_entry"
                 android:linksClickable="true"
+                android:background="@android:color/background_light"
                 android:inputType="text|textMultiLine|textCapSentences"
                 />
-
+        </FrameLayout>
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
@@ -104,14 +139,16 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/wordedit_change_trans_but"
-                android:src="@drawable/ic_action_import_export" />
+                android:id="@+id/wordedit_preview_but"
+                android:src="@drawable/ic_action_edit" />
 
-            <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/texttype_arr"
-                    android:id="@+id/wordedit_trans_type"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/wordedit_change_trans_but"
+                android:src="@drawable/ic_action_import_export"
+                android:layout_marginTop="5dp" />
+
         </LinearLayout>
 
     </LinearLayout>
@@ -164,6 +201,12 @@
         <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@android:string/cancel"
                 android:id="@+id/wordedit_cancel_but" android:layout_gravity="right|center_vertical"
                 android:paddingLeft="20dp" android:paddingRight="20dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_word_lbl"
+            android:id="@+id/wordedit_ok_and_new" />
 
         <Button
                 android:layout_width="wrap_content"

@@ -28,7 +28,6 @@ public class WordEditFragment extends Fragment
     EditText translationEdit;
     EditText tagsEdit;
     Spinner  langSpinner;
-    Spinner  translationTextFmtSpinner;
     TextView translationLbl;
 
     TagSet wordTags = new TagSet();
@@ -36,6 +35,12 @@ public class WordEditFragment extends Fragment
     Words current;
     ImageButton changeTransBut;
     ImageButton transBut;
+    ImageButton previewBut;
+
+    FrameLayout frameLay;
+    LinearLayout webLinearLay;
+    TextView     webView;
+
 
     boolean inTransMode = true;
 
@@ -85,6 +90,25 @@ public class WordEditFragment extends Fragment
             }
         });
 
+        Button addNew = (Button) v.findViewById(R.id.wordedit_ok_and_new);
+        if(current != null)
+        {
+            addNew.setEnabled(false);
+        }
+        else
+        {
+            addNew.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    doOK();
+                    clearAll();
+                    wordEdit.requestFocus();
+                }
+            });
+        }
+
         Button  cancelBut = (Button) v.findViewById(R.id.wordedit_cancel_but);
         cancelBut.setOnClickListener(new View.OnClickListener()
         {
@@ -107,7 +131,6 @@ public class WordEditFragment extends Fragment
         });
 
         langSpinner = (Spinner) v.findViewById(R.id.wordedit_lang_spin);
-        translationTextFmtSpinner = (Spinner) v.findViewById(R.id.wordedit_trans_type);
 
         changeTransBut = (ImageButton) v.findViewById(R.id.wordedit_change_trans_but);
         changeTransBut.setOnClickListener(new View.OnClickListener()
@@ -144,6 +167,20 @@ public class WordEditFragment extends Fragment
             }
         });
 
+        previewBut = (ImageButton) v.findViewById(R.id.wordedit_preview_but);
+        previewBut.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                showPreviewMode(!previewMode);
+            }
+        });
+
+        webView = (TextView) v.findViewById(R.id.wordedit_translate_web);
+        webLinearLay = (LinearLayout) v.findViewById(R.id.wordedit_web_lay);
+        frameLay = (FrameLayout) v.findViewById(R.id.wordedit_frame_lay);
+
         setValues();
 
         return v;
@@ -155,6 +192,7 @@ public class WordEditFragment extends Fragment
     String thesaurusText;
     int thesaurusFmtIdx;
 
+    boolean previewMode = false;
 
     private void askThesaurus()
     {
@@ -167,6 +205,8 @@ public class WordEditFragment extends Fragment
         if(!StringUtils.isNullOrEmpty(definition))
         {
             thesaurusText = definition;
+            thesaurusFmtIdx = 1;
+
             if(inTransMode)
             {
                 changeTransMode();
@@ -174,7 +214,31 @@ public class WordEditFragment extends Fragment
             {
                 showTransMode();
             }
+            showPreviewMode(true);
         }
+    }
+
+    private void showPreviewMode(boolean preview)
+    {
+        if(previewMode != preview)
+        {
+            previewMode = preview;
+        }
+
+        if(previewMode)
+        {
+            frameLay.bringChildToFront(webLinearLay);
+            previewBut.setImageResource(R.drawable.ic_action_view_as_list);
+            webView.setText(StringUtils.toTextHtmlH2(translationEdit.getText().toString()));
+        } else
+        {
+            frameLay.bringChildToFront(translationEdit);
+            previewBut.setImageResource(R.drawable.ic_action_edit);
+        }
+
+        frameLay.requestLayout();
+        frameLay.invalidate();
+        previewBut.setImageResource(previewMode ? R.drawable.ic_action_view_as_list : R.drawable.ic_action_edit);
     }
 
 
@@ -197,15 +261,11 @@ public class WordEditFragment extends Fragment
         if(inTransMode)
         {
             translationEdit.setText(translationText);
-            translationTextFmtSpinner.setSelection(translationFmtIdx);
-
             translationLbl.setText(R.string.workedit_translate);
             changeTransBut.setImageResource(R.drawable.ic_action_import_export);
         } else
         {
             translationEdit.setText(thesaurusText);
-            translationTextFmtSpinner.setSelection(thesaurusFmtIdx);
-
             translationLbl.setText(R.string.workedit_thesaurus);
             changeTransBut.setImageResource(R.drawable.ic_action_web_site);
         }
@@ -216,18 +276,25 @@ public class WordEditFragment extends Fragment
         if(inTransMode)
         {
             translationText = this.translationEdit.getText().toString();
-            translationFmtIdx = translationTextFmtSpinner.getSelectedItemPosition();
-
         }
         else
         {
             thesaurusText = this.translationEdit.getText().toString();
-            thesaurusFmtIdx = translationTextFmtSpinner.getSelectedItemPosition();
-
         }
 
         inTransMode = !inTransMode;
         showTransMode();
+    }
+
+    protected  void clearAll()
+    {
+        wordEdit.setText("");
+        thesaurusText = "";
+        translationText = "";
+        thesaurusFmtIdx = 0;
+        translationFmtIdx = 0;
+        showTransMode();
+        setTagsList();
     }
 
     protected void setValues()
@@ -247,31 +314,8 @@ public class WordEditFragment extends Fragment
                 }
             }
 
-            {
-                SpinnerAdapter adapter = translationTextFmtSpinner.getAdapter();
-                String fmt = current.isFlagSet(Words.FLAG_THESAURUS_IN_HTML) ? Words.HTML_FMT : Words.TEXT_FMT;
-                for (int i = 0; i < adapter.getCount();i++)
-                {
-                    if(fmt.equals(adapter.getItem(i).toString()))
-                    {
-                        thesaurusFmtIdx = i;
-                        break;
-                    }
-                }
-            }
-
-            {
-                SpinnerAdapter adapter = translationTextFmtSpinner.getAdapter();
-                String fmt = current.isFlagSet(Words.FLAG_TRANSLATION_IN_HTML) ? Words.HTML_FMT : Words.TEXT_FMT;
-                for (int i = 0; i < adapter.getCount();i++)
-                {
-                    if(fmt.equals(adapter.getItem(i).toString()))
-                    {
-                        translationFmtIdx = i;
-                        break;
-                    }
-                }
-            }
+            thesaurusFmtIdx = current.isFlagSet(Words.FLAG_THESAURUS_IN_HTML) ? 1 : 0;
+            translationFmtIdx = current.isFlagSet(Words.FLAG_TRANSLATION_IN_HTML) ? 1 : 0;
             translationText = current.getTranslation();
             thesaurusText = current.getThesaurus();
 
@@ -300,11 +344,9 @@ public class WordEditFragment extends Fragment
             if(inTransMode)
             {
                 translationText = translationEdit.getText().toString();
-                translationFmtIdx = translationTextFmtSpinner.getSelectedItemPosition();
             } else
             {
                 thesaurusText = translationEdit.getText().toString();
-                thesaurusFmtIdx = translationTextFmtSpinner.getSelectedItemPosition();
             }
 
             Words word = current != null ? current : WordFactory.instance().newWord();
@@ -315,10 +357,8 @@ public class WordEditFragment extends Fragment
 
             word.setLang(langSpinner.getSelectedItem().toString());
 
-            SpinnerAdapter adapter = translationTextFmtSpinner.getAdapter();
-
-            word.setFlagBit(Words.HTML_FMT.equals(adapter.getItem(thesaurusFmtIdx).toString()) ? Words.FLAG_THESAURUS_IN_HTML : 0);
-            word.setFlagBit(Words.HTML_FMT.equals(adapter.getItem(translationFmtIdx).toString()) ? Words.FLAG_TRANSLATION_IN_HTML : 0);
+            word.setFlagBit(thesaurusFmtIdx > 0 ? Words.FLAG_THESAURUS_IN_HTML : 0);
+            word.setFlagBit(translationFmtIdx > 0 ? Words.FLAG_TRANSLATION_IN_HTML : 0);
 
             word.setTags(this.wordTags);
 
