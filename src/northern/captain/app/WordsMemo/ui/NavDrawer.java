@@ -58,6 +58,8 @@ public class NavDrawer
         items.add(new DrawerItem(R.string.mi_title_settings, DrawerItem.TYPE_TITLE));
         items.add(new DrawerItem(R.string.mi_categories));
         items.add(new DrawerItem(R.string.mi_manage_words));
+        items.add(new DrawerItem(R.string.mi_export_xls));
+        items.add(new DrawerItem(R.string.mi_import_xls));
 
         drawerList.setAdapter(new CustomListAdapter(activity, R.layout.drawerlist_row));
         drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -99,6 +101,9 @@ public class NavDrawer
                         }, 100);
                     }
                 }));
+                break;
+            case R.string.mi_export_xls:
+                openFragment(FragmentFactory.instance().newExportFragment());
                 break;
         }
         mDrawerLayout.closeDrawer(Gravity.START);

@@ -20,7 +20,7 @@ public class UsersDB extends Tags implements ICRUD
     public static final String TBL_USERS    = "users";
     public static final String DBF_ID       = "id";
     public static final String DBF_NAME     = "name";
-    public static final String DBF_COMMENTS = "comments";
+    public static final String DBF_COMMENTS = "thesaurus";
     public static final String DBF_MODIFIED = "modified";
 
     @Override

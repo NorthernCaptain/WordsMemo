@@ -39,6 +39,8 @@
     <string name="mi_do_training">Тренировка</string>
     <string name="mi_do_test">Тест на очки</string>
     <string name="mi_manage_words">Управление словарем</string>
+    <string name="mi_export_xls">Экспорт в Excel</string>
+    <string name="mi_import_xls">Импорт из Excel</string>
     <string name="word_count">Кол-во слов</string>
     <string name="action_new_tag">Создать</string>
     <string name="words_lbl">Слова:</string>
@@ -51,4 +53,8 @@
     <string name="test_name">Название теста:</string>
     <string name="test_setup_title">Параметры теста:</string>
     <string name="new_word_lbl">+ Слово</string>
+    <string name="fname_lbl">Имя файла:</string>
+    <string name="export_dir_lbl">Экспортировать в папку:</string>
+    <string name="err_wrong_dir_name">Ошибка: Неверное имя папки!</string>
+    <string name="err_wrong_file_name">Ошибка: Неверное имя файла!</string>
 </resources>

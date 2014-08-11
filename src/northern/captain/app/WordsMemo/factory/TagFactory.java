@@ -107,6 +107,50 @@ public class TagFactory
         return tagsList;
     }
 
+    public Map<String, Tags> getTagsMap()
+    {
+        Map<String, Tags> tagMap = new HashMap<String, Tags>();
+        List<Tags> allTags = getTags();
+
+        for(Tags tag : allTags)
+        {
+            tagMap.put(tag.getName(), tag);
+        }
+
+        return tagMap;
+    }
+
+    public TagSet getTagsFromStringNames(Map<String, Tags> allTags, String tagNames)
+    {
+        if(StringUtils.isNullOrEmpty(tagNames))
+            return null;
+
+        String[] names = tagNames.split(",");
+
+        if(names.length == 0)
+            return null;
+
+        TagSet tset = new TagSet();
+        for(String name : names)
+        {
+            name = name.trim();
+            if(StringUtils.isNullOrEmpty(name))
+                continue;
+
+            Tags tag = allTags.get(name);
+            if(tag == null)
+            {
+                tag = TagFactory.instance().newTag();
+                tag.setName(name);
+                TagFactory.instance().add(tag);
+                allTags.put(name, tag);
+            }
+            tset.add(tag);
+        }
+
+        return tset;
+    }
+
     public void add(Tags account)
     {
         ((TagsDB)account).insert();

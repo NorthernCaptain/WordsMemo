@@ -38,6 +38,11 @@ public class FragmentFactory
         return new TagsFragment();
     }
 
+    public ExportXLSFragment newExportFragment()
+    {
+        return new ExportXLSFragment();
+    }
+
     public IntroFragment newIntroFragment()
     {
         return new IntroFragment();

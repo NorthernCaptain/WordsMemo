@@ -39,6 +39,8 @@
     <string name="mi_do_training">Training</string>
     <string name="mi_do_test">Test with score</string>
     <string name="mi_manage_words">Manage words</string>
+    <string name="mi_export_xls">Export words to excel</string>
+    <string name="mi_import_xls">Import words from excel</string>
     <string name="word_count">words</string>
     <string name="action_new_tag">Create</string>
     <string name="words_lbl">Words:</string>
@@ -51,4 +53,8 @@
     <string name="test_name">Test name:</string>
     <string name="test_setup_title">Test parameters:</string>
     <string name="new_word_lbl">+ Word</string>
+    <string name="fname_lbl">Filename:</string>
+    <string name="export_dir_lbl">Export to directory:</string>
+    <string name="err_wrong_dir_name">Error: invalid directory name!</string>
+    <string name="err_wrong_file_name">Error: invalid file name!</string>
 </resources>

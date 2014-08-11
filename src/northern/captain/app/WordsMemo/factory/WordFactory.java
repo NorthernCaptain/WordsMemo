@@ -134,6 +134,29 @@ public class WordFactory
         return null;
     }
 
+    public Words getByName(String name)
+    {
+        SQLiteDatabase db = SQLManager.instance().dbr();
+
+        String query = "SELECT * from " + WordsDB.TBL_WORDS + " WHERE name = '" + name + "'";
+
+        Cursor cursor = db.rawQuery(query, null);
+        try
+        {
+            if (cursor.moveToFirst())
+            {
+                WordsDB wordsDB = new WordsDB();
+                wordsDB.read(cursor);
+                return wordsDB;
+            }
+        }
+        finally
+        {
+            cursor.close();
+        }
+        return null;
+    }
+
     public void add(Words account)
     {
         ((WordsDB)account).insert();

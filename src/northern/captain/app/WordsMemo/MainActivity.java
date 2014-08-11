@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.*;
 import northern.captain.app.WordsMemo.db.SQLManager;
+import northern.captain.app.WordsMemo.factory.ExportImportFactory;
 import northern.captain.app.WordsMemo.factory.TTSFactory;
 import northern.captain.app.WordsMemo.factory.TagFactory;
 import northern.captain.app.WordsMemo.factory.WordFactory;
@@ -149,6 +150,7 @@ public class MainActivity extends ActionBarActivity
         FragmentFactory.initialize();
         TTSFactory.initialize();
         TTSFactory.instance().initEngine();
+        ExportImportFactory.initialize();
 
         drawer.setFragment(FragmentFactory.instance().newIntroFragment());
     }

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/export_dir_lbl"
+            android:id="@+id/textView11" android:layout_gravity="center_vertical|left" android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" android:textColor="@color/holoblue_dark" android:textStyle="bold"/>
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/export_dir_entry" android:maxLines="1" android:lines="1"
+            android:linksClickable="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:inputType="none" android:editable="true"
+            android:clickable="true" />
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/fname_lbl"
+            android:id="@+id/textView12" android:layout_gravity="center_vertical|left" android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" android:textColor="@color/holoblue_dark" android:textStyle="bold"/>
+    <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/export_name_entry" android:maxLines="1" android:lines="1"
+            android:linksClickable="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:inputType="none" android:editable="true"
+            android:clickable="true" />
+
+    <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/exportPBar"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/exportPLbl" android:layout_gravity="center_vertical|left" android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" android:textColor="@color/holoblue_dark" android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            />
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_gravity="bottom|right">
+
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mi_export_xls"
+                android:id="@+id/export_xls_btn"
+                android:paddingLeft="30dp" android:paddingRight="30dp"/>
+    </LinearLayout>
+
+</LinearLayout>
