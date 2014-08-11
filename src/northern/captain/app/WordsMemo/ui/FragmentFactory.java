@@ -1,7 +1,6 @@
 package northern.captain.app.WordsMemo.ui;
 
 import northern.captain.app.WordsMemo.logic.Tags;
-import northern.captain.app.WordsMemo.logic.TrainingParams;
 import northern.captain.app.WordsMemo.logic.TrainingSession;
 import northern.captain.app.WordsMemo.logic.Words;
 
@@ -41,6 +40,11 @@ public class FragmentFactory
     public ExportXLSFragment newExportFragment()
     {
         return new ExportXLSFragment();
+    }
+
+    public ImportXLSFragment newImportFragment()
+    {
+        return new ImportXLSFragment();
     }
 
     public IntroFragment newIntroFragment()

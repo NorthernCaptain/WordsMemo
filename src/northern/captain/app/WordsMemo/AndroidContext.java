@@ -3,6 +3,7 @@ package northern.captain.app.WordsMemo;
 import android.os.Handler;
 import android.view.Menu;
 import northern.captain.app.WordsMemo.ui.NavDrawer;
+import northern.captain.tools.Settings;
 
 
 /**
@@ -24,4 +25,6 @@ public class AndroidContext
     public NavDrawer drawer;
 
     public Handler mainHandler;
+
+    public Settings settings;
 }

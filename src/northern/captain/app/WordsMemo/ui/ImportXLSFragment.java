@@ -20,13 +20,11 @@ import northern.captain.tools.Settings;
 import northern.captain.tools.StringUtils;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by leo on 11.08.2014.
  */
-public class ExportXLSFragment extends Fragment
+public class ImportXLSFragment extends Fragment
 {
     EditText fnameText;
     EditText dirnameText;
@@ -35,26 +33,28 @@ public class ExportXLSFragment extends Fragment
 
     ProgressBar progressBar;
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View v = inflater.inflate(R.layout.export_excel, container, false);
+        View v = inflater.inflate(R.layout.import_excel, container, false);
 
-        fnameText = (EditText)v.findViewById(R.id.export_name_entry);
-        dirnameText = (EditText)v.findViewById(R.id.export_dir_entry);
+        fnameText = (EditText)v.findViewById(R.id.import_name_entry);
+        dirnameText = (EditText)v.findViewById(R.id.import_dir_entry);
 
-        resultText = (TextView)v.findViewById(R.id.exportPLbl);
+        resultText = (TextView)v.findViewById(R.id.importPLbl);
 
-        progressBar = (ProgressBar)v.findViewById(R.id.exportPBar);
+        progressBar = (ProgressBar)v.findViewById(R.id.importPBar);
 
-        Button doBut = (Button)v.findViewById(R.id.export_xls_btn);
+        Button doBut = (Button)v.findViewById(R.id.import_xls_btn);
 
         doBut.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                doExport();
+                doImport();
             }
         });
 
@@ -64,21 +64,16 @@ public class ExportXLSFragment extends Fragment
 
     protected void initForm()
     {
-        StringBuilder fnameBuf = new StringBuilder("words_memo_");
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyy_MM_dd");
-        fnameBuf.append(fmt.format(new Date()));
-        fnameBuf.append(".xls");
-
-        fnameText.setText(fnameBuf.toString());
+        fnameText.setText(AndroidContext.current.settings.getString(Settings.IMPORT_FNAME, "words_memo.xls"));
 
         File extDir = Environment.getExternalStorageDirectory();
         File ourDir = new File(extDir, "WordsMemo");
         String ourDirPath = ourDir.getAbsolutePath();
-        ourDirPath = AndroidContext.current.settings.getString(Settings.EXPORT_PATH, ourDirPath);
+        ourDirPath = AndroidContext.current.settings.getString(Settings.IMPORT_PATH, ourDirPath);
         dirnameText.setText(ourDirPath);
     }
 
-    private File getOutFile()
+    private File getInputFile()
     {
         String dirName = dirnameText.getText().toString().trim();
         if(StringUtils.isNullOrEmpty(dirName))
@@ -94,7 +89,7 @@ public class ExportXLSFragment extends Fragment
             return null;
         }
 
-        AndroidContext.current.settings.setString(Settings.EXPORT_PATH, ourDir.getAbsolutePath());
+        AndroidContext.current.settings.setString(Settings.IMPORT_PATH, ourDir.getAbsolutePath());
 
         String fName = fnameText.getText().toString().trim();
         if(StringUtils.isNullOrEmpty(fName))
@@ -105,39 +100,46 @@ public class ExportXLSFragment extends Fragment
 
         File ourFile = new File(ourDir, fName);
 
+        if(!ourFile.exists())
+        {
+            MyToast.toast(MyToast.WARN, R.string.err_wrong_file_name, true);
+            return null;
+        }
+
+        AndroidContext.current.settings.setString(Settings.IMPORT_FNAME, fName);
+
         return ourFile;
     }
 
-    protected void doExport()
+    protected void doImport()
     {
-        final File outputFile = getOutFile();
+        final File inputFile = getInputFile();
 
-        if(outputFile == null)
+        if(inputFile == null)
             return;
 
-        AsyncTask<Void, Integer, Integer> expTask = new AsyncTask<Void, Integer, Integer>()
+        AsyncTask<Void, Integer, Integer> impTask = new AsyncTask<Void, Integer, Integer>()
         {
+
             @Override
             protected void onPreExecute()
             {
                 super.onPreExecute();
-                resultText.setText("Exporting....");
                 progressBar.setProgress(0);
-                progressBar.setVisibility(View.VISIBLE);
+                resultText.setText("Importing....");
             }
 
             @Override
             protected Integer doInBackground(Void... voids)
             {
-                int ret = ExportImportFactory.instance().doExport(ExportImportFactory.TYPE_XLS, outputFile,
-                        new IProgressUpdate()
-                        {
-                            @Override
-                            public void updateProgress(int currentValue, int maxValue)
-                            {
-                                publishProgress(new Integer[]{currentValue, maxValue});
-                            }
-                        });
+                int ret = ExportImportFactory.instance().doImport(ExportImportFactory.TYPE_XLS, inputFile, new IProgressUpdate()
+                {
+                    @Override
+                    public void updateProgress(int currentValue, int maxValue)
+                    {
+                        publishProgress(new Integer[]{ currentValue, maxValue});
+                    }
+                });
                 return ret;
             }
 
@@ -145,18 +147,23 @@ public class ExportXLSFragment extends Fragment
             protected void onPostExecute(Integer result)
             {
                 super.onPostExecute(result);
-                resultText.setText("Done, total records: " + result);
-                progressBar.setVisibility(View.INVISIBLE);
+                resultText.setText("Done, total entries: " + result);
             }
 
             @Override
             protected void onProgressUpdate(Integer... values)
             {
                 super.onProgressUpdate(values);
-                progressBar.setProgress(values[0]);
+
+                int max = values[1];
+                int cur = values[0];
+
+                if(progressBar.getMax() != max)
+                    progressBar.setMax(max);
+                progressBar.setProgress(cur);
             }
         };
 
-        expTask.execute();
+        impTask.execute();
     }
 }

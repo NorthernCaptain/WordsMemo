@@ -7,13 +7,13 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/export_dir_lbl"
+            android:text="@string/import_dir_lbl"
             android:id="@+id/textView11" android:layout_gravity="center_vertical|left" android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp" android:textColor="@color/holoblue_dark" android:textStyle="bold"/>
     <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/export_dir_entry" android:maxLines="1" android:lines="1"
+            android:id="@+id/import_dir_entry" android:maxLines="1" android:lines="1"
             android:linksClickable="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -28,7 +28,7 @@
     <EditText
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/export_name_entry" android:maxLines="1" android:lines="1"
+            android:id="@+id/import_name_entry" android:maxLines="1" android:lines="1"
             android:linksClickable="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -39,19 +39,19 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/exportPBar"
+            android:id="@+id/importPBar"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
-            android:indeterminate="true"
-            android:indeterminateBehavior="cycle"
-            android:visibility="invisible"/>
+            android:indeterminate="false"
+            android:indeterminateOnly="false"
+            android:indeterminateBehavior="cycle"/>
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/exportPLbl" android:layout_gravity="center_vertical|left" android:layout_marginLeft="5dp"
+            android:id="@+id/importPLbl" android:layout_gravity="center_vertical|left" android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp" android:textColor="@color/holoblue_dark" android:textStyle="bold"
             android:layout_marginTop="5dp"
             />
@@ -63,8 +63,8 @@
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mi_export_xls"
-                android:id="@+id/export_xls_btn"
+                android:text="@string/mi_import_xls"
+                android:id="@+id/import_xls_btn"
                 android:paddingLeft="30dp" android:paddingRight="30dp"/>
     </LinearLayout>
 

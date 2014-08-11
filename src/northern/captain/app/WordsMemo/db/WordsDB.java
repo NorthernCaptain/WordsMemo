@@ -79,6 +79,8 @@ public class WordsDB extends Words implements ICRUD
         values.put(DBF_TRANS_LANG, transLang);
 
         db.update(TBL_WORDS, values, DBF_ID + " = ?", new String[] { String.valueOf(id)});
+
+        setTags(tags);
     }
 
     @Override
@@ -119,6 +121,9 @@ public class WordsDB extends Words implements ICRUD
 
         SQLiteDatabase db = SQLManager.instance().db();
         db.delete(TBL_WORDTAGS, DBF_WORDTAGS_WORD_ID + " = ?", new String[] { String.valueOf(id)});
+
+        if(tags == null)
+            return;
 
         for(Tags tag : tags)
         {

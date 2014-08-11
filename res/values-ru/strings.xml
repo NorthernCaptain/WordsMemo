@@ -55,6 +55,7 @@
     <string name="new_word_lbl">+ Слово</string>
     <string name="fname_lbl">Имя файла:</string>
     <string name="export_dir_lbl">Экспортировать в папку:</string>
+    <string name="import_dir_lbl">Импортировать из папки:</string>
     <string name="err_wrong_dir_name">Ошибка: Неверное имя папки!</string>
     <string name="err_wrong_file_name">Ошибка: Неверное имя файла!</string>
 </resources>

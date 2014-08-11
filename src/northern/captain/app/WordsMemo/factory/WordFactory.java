@@ -138,9 +138,9 @@ public class WordFactory
     {
         SQLiteDatabase db = SQLManager.instance().dbr();
 
-        String query = "SELECT * from " + WordsDB.TBL_WORDS + " WHERE name = '" + name + "'";
+        String query = "SELECT * from " + WordsDB.TBL_WORDS + " WHERE name = ?";
 
-        Cursor cursor = db.rawQuery(query, null);
+        Cursor cursor = db.rawQuery(query, new String[] { name });
         try
         {
             if (cursor.moveToFirst())

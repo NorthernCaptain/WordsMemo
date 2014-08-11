@@ -105,6 +105,9 @@ public class NavDrawer
             case R.string.mi_export_xls:
                 openFragment(FragmentFactory.instance().newExportFragment());
                 break;
+            case R.string.mi_import_xls:
+                openFragment(FragmentFactory.instance().newImportFragment());
+                break;
         }
         mDrawerLayout.closeDrawer(Gravity.START);
     }

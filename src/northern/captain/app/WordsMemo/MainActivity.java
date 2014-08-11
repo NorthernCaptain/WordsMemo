@@ -15,6 +15,7 @@ import northern.captain.app.WordsMemo.factory.WordFactory;
 import northern.captain.app.WordsMemo.ui.FragmentFactory;
 import northern.captain.app.WordsMemo.ui.NavDrawer;
 import northern.captain.tools.MyToast;
+import northern.captain.tools.Settings;
 
 public class MainActivity extends ActionBarActivity
 {
@@ -41,6 +42,7 @@ public class MainActivity extends ActionBarActivity
 
         AndroidContext.current = new AndroidContext();
         AndroidContext.current.app = this;
+        AndroidContext.current.settings = new Settings();
 
         MyToast.initialize();
 

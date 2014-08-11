@@ -1,7 +1,5 @@
 package northern.captain.app.WordsMemo.logic;
 
-import java.util.Set;
-
 /**
  * Copyright 2013 by Northern Captain Software
  * User: leo
@@ -30,6 +28,8 @@ public class Words
     public static final String HTML_FMT = "Htm";
     public static final String TEXT_FMT = "Txt";
 
+    public static final String LANG_EN = "EN";
+    public static final String LANG_RU = "RU";
 
     public int getStatus()
     {

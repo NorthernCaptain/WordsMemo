@@ -55,6 +55,7 @@
     <string name="new_word_lbl">+ Word</string>
     <string name="fname_lbl">Filename:</string>
     <string name="export_dir_lbl">Export to directory:</string>
+    <string name="import_dir_lbl">Import from directory:</string>
     <string name="err_wrong_dir_name">Error: invalid directory name!</string>
     <string name="err_wrong_file_name">Error: invalid file name!</string>
 </resources>
