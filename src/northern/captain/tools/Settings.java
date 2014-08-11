@@ -14,11 +14,6 @@ import northern.captain.app.WordsMemo.AndroidContext;
  */
 public class Settings
 {
-    public static final String IMPORT_PATH = "importPath";
-    public static final String IMPORT_FNAME = "importFName";
-    public static final String EXPORT_PATH = "exportPath";
-
-
     SharedPreferences preferences;
 
     public Settings()
@@ -35,6 +30,18 @@ public class Settings
     {
         SharedPreferences.Editor edit = preferences.edit();
         edit.putString(name, value);
+        edit.commit();
+    }
+
+    public int getInt(String name, int defaultValue)
+    {
+        return preferences.getInt(name, defaultValue);
+    }
+
+    public void setInt(String name, int value)
+    {
+        SharedPreferences.Editor edit = preferences.edit();
+        edit.putInt(name, value);
         edit.commit();
     }
 }

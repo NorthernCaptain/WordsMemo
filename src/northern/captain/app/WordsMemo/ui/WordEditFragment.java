@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import northern.captain.app.WordsMemo.AndroidContext;
 import northern.captain.app.WordsMemo.R;
 import northern.captain.app.WordsMemo.factory.TTSFactory;
 import northern.captain.app.WordsMemo.factory.WordFactory;
 import northern.captain.app.WordsMemo.logic.TagSet;
 import northern.captain.app.WordsMemo.logic.ThesaurusRetrieverFactory;
 import northern.captain.app.WordsMemo.logic.Words;
+import northern.captain.tools.SettingsNames;
 import northern.captain.tools.StringUtils;
 
 /**
@@ -324,6 +326,14 @@ public class WordEditFragment extends Fragment
 
             wordTags.clear();
             wordTags.addAll(current.getTags());
+        } else
+        {
+            wordTags.clear();
+
+            String tagString = AndroidContext.current.settings.getString(SettingsNames.WORD_EDIT_TAGS, new TagSet().id2String());
+            TagSet tags = new TagSet();
+            tags.string2Id(tagString);
+            wordTags.addAll(tags);
         }
         setTagsList();
     }
@@ -331,6 +341,7 @@ public class WordEditFragment extends Fragment
     protected void setTagsList()
     {
         tagsEdit.setText(wordTags.toString());
+        AndroidContext.current.settings.setString(SettingsNames.WORD_EDIT_TAGS, wordTags.id2String());
     }
 
     protected void doOK()
@@ -362,6 +373,8 @@ public class WordEditFragment extends Fragment
             word.setFlagBit(translationFmtIdx > 0 ? Words.FLAG_TRANSLATION_IN_HTML : 0);
 
             word.setTags(this.wordTags);
+
+            AndroidContext.current.settings.setString(SettingsNames.WORD_EDIT_TAGS, wordTags.id2String());
 
             okListener.onOK(word, word == current);
         }

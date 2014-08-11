@@ -14,10 +14,7 @@ import android.widget.TextView;
 import northern.captain.app.WordsMemo.AndroidContext;
 import northern.captain.app.WordsMemo.R;
 import northern.captain.app.WordsMemo.factory.ExportImportFactory;
-import northern.captain.tools.IProgressUpdate;
-import northern.captain.tools.MyToast;
-import northern.captain.tools.Settings;
-import northern.captain.tools.StringUtils;
+import northern.captain.tools.*;
 
 import java.io.File;
 
@@ -64,12 +61,12 @@ public class ImportXLSFragment extends Fragment
 
     protected void initForm()
     {
-        fnameText.setText(AndroidContext.current.settings.getString(Settings.IMPORT_FNAME, "words_memo.xls"));
+        fnameText.setText(AndroidContext.current.settings.getString(SettingsNames.IMPORT_FNAME, "words_memo.xls"));
 
         File extDir = Environment.getExternalStorageDirectory();
         File ourDir = new File(extDir, "WordsMemo");
         String ourDirPath = ourDir.getAbsolutePath();
-        ourDirPath = AndroidContext.current.settings.getString(Settings.IMPORT_PATH, ourDirPath);
+        ourDirPath = AndroidContext.current.settings.getString(SettingsNames.IMPORT_PATH, ourDirPath);
         dirnameText.setText(ourDirPath);
     }
 
@@ -89,7 +86,7 @@ public class ImportXLSFragment extends Fragment
             return null;
         }
 
-        AndroidContext.current.settings.setString(Settings.IMPORT_PATH, ourDir.getAbsolutePath());
+        AndroidContext.current.settings.setString(SettingsNames.IMPORT_PATH, ourDir.getAbsolutePath());
 
         String fName = fnameText.getText().toString().trim();
         if(StringUtils.isNullOrEmpty(fName))
@@ -106,7 +103,7 @@ public class ImportXLSFragment extends Fragment
             return null;
         }
 
-        AndroidContext.current.settings.setString(Settings.IMPORT_FNAME, fName);
+        AndroidContext.current.settings.setString(SettingsNames.IMPORT_FNAME, fName);
 
         return ourFile;
     }

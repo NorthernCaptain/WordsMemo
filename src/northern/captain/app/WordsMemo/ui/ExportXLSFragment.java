@@ -14,10 +14,7 @@ import android.widget.TextView;
 import northern.captain.app.WordsMemo.AndroidContext;
 import northern.captain.app.WordsMemo.R;
 import northern.captain.app.WordsMemo.factory.ExportImportFactory;
-import northern.captain.tools.IProgressUpdate;
-import northern.captain.tools.MyToast;
-import northern.captain.tools.Settings;
-import northern.captain.tools.StringUtils;
+import northern.captain.tools.*;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -74,7 +71,7 @@ public class ExportXLSFragment extends Fragment
         File extDir = Environment.getExternalStorageDirectory();
         File ourDir = new File(extDir, "WordsMemo");
         String ourDirPath = ourDir.getAbsolutePath();
-        ourDirPath = AndroidContext.current.settings.getString(Settings.EXPORT_PATH, ourDirPath);
+        ourDirPath = AndroidContext.current.settings.getString(SettingsNames.EXPORT_PATH, ourDirPath);
         dirnameText.setText(ourDirPath);
     }
 
@@ -94,7 +91,7 @@ public class ExportXLSFragment extends Fragment
             return null;
         }
 
-        AndroidContext.current.settings.setString(Settings.EXPORT_PATH, ourDir.getAbsolutePath());
+        AndroidContext.current.settings.setString(SettingsNames.EXPORT_PATH, ourDir.getAbsolutePath());
 
         String fName = fnameText.getText().toString().trim();
         if(StringUtils.isNullOrEmpty(fName))
