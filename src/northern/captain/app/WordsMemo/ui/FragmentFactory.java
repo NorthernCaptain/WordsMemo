@@ -1,6 +1,8 @@
 package northern.captain.app.WordsMemo.ui;
 
+import android.view.View;
 import northern.captain.app.WordsMemo.logic.Tags;
+import northern.captain.app.WordsMemo.logic.Tasks;
 import northern.captain.app.WordsMemo.logic.TrainingSession;
 import northern.captain.app.WordsMemo.logic.Words;
 
@@ -69,8 +71,33 @@ public class FragmentFactory
         return new TestSetupFragment(listener);
     }
 
+    public TestCreateFragment newTestCreateFragment(TestCreateFragment.onOKListener listener)
+    {
+        return new TestCreateFragment(listener);
+    }
+
+    public TestingFragment newTestingFragment(Tasks params, TestingFragment.OnDoneListener onDoneListener)
+    {
+        return new TestingFragment(params, onDoneListener);
+    }
+
     public TrainingFragment newTrainingFragment(TrainingSession params)
     {
         return new TrainingFragment(params);
+    }
+
+    public TestResultFragment newTestResultFragment(Tasks session, View.OnClickListener onOk)
+    {
+        return new TestResultFragment(session, onOk);
+    }
+
+    public TaskInfoListFragment newTaskInfoListFragment(int status, boolean sortByScore, TaskInfoListFragment.OnTaskSelectedListener listener)
+    {
+        return new TaskInfoListFragment(status, sortByScore, listener);
+    }
+
+    public WordErrorsForTaskFragment newWordErrorsForTaskFragment(Tasks task)
+    {
+        return new WordErrorsForTaskFragment(task);
     }
 }

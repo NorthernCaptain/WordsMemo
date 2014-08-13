@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.*;
 import northern.captain.app.WordsMemo.AndroidContext;
 import northern.captain.app.WordsMemo.R;
+import northern.captain.app.WordsMemo.logic.Tasks;
 import northern.captain.app.WordsMemo.logic.TrainingSession;
 
 import java.util.ArrayList;
@@ -55,6 +56,7 @@ public class NavDrawer
         items.add(new DrawerItem(R.string.mi_title_main, DrawerItem.TYPE_TITLE));
         items.add(new DrawerItem(R.string.mi_do_training));
         items.add(new DrawerItem(R.string.mi_do_test));
+        items.add(new DrawerItem(R.string.mi_testing_results));
         items.add(new DrawerItem(R.string.mi_title_settings, DrawerItem.TYPE_TITLE));
         items.add(new DrawerItem(R.string.mi_categories));
         items.add(new DrawerItem(R.string.mi_manage_words));
@@ -107,6 +109,100 @@ public class NavDrawer
                 break;
             case R.string.mi_import_xls:
                 openFragment(FragmentFactory.instance().newImportFragment());
+                break;
+            case R.string.mi_do_test:
+                openFragment(FragmentFactory.instance().newTestCreateFragment(new TestCreateFragment.onOKListener()
+                {
+                    @Override
+                    public void onOK(final Tasks params)
+                    {
+                        params.start();
+                        activity.getSupportFragmentManager().popBackStack();
+                        AndroidContext.current.mainHandler.postDelayed(new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                openFragment(FragmentFactory.instance().newTestingFragment(params,
+                                        new TestingFragment.OnDoneListener()
+                                        {
+                                            @Override
+                                            public void onDone(Tasks session)
+                                            {
+                                                activity.getSupportFragmentManager().popBackStack();
+                                                openFragment(FragmentFactory.instance().newTestResultFragment(session, new View.OnClickListener()
+                                                {
+                                                    @Override
+                                                    public void onClick(View view)
+                                                    {
+                                                        activity.getSupportFragmentManager().popBackStack();
+                                                    }
+                                                }));
+                                            }
+                                        }));
+                            }
+                        }, 100);
+                    }
+
+                    @Override
+                    public void onContinue()
+                    {
+                        openFragment(FragmentFactory.instance().newTaskInfoListFragment(Tasks.STATUS_PROCESSING, false,
+                                new TaskInfoListFragment.OnTaskSelectedListener()
+                                {
+                                    @Override
+                                    public void onSelected(final Tasks task)
+                                    {
+                                        activity.getSupportFragmentManager().popBackStack();
+                                        activity.getSupportFragmentManager().popBackStack();
+                                        AndroidContext.current.mainHandler.postDelayed(new Runnable()
+                                        {
+                                            @Override
+                                            public void run()
+                                            {
+                                                openFragment(FragmentFactory.instance().newTestingFragment(task,
+                                                        new TestingFragment.OnDoneListener()
+                                                        {
+                                                            @Override
+                                                            public void onDone(Tasks session)
+                                                            {
+                                                                activity.getSupportFragmentManager().popBackStack();
+                                                                openFragment(FragmentFactory.instance().newTestResultFragment(session, new View.OnClickListener()
+                                                                {
+                                                                    @Override
+                                                                    public void onClick(View view)
+                                                                    {
+                                                                        activity.getSupportFragmentManager().popBackStack();
+                                                                    }
+                                                                }));
+                                                            }
+                                                        }));
+                                            }
+                                        }, 100);
+
+                                    }
+                                }));
+                    }
+                }));
+                break;
+            case R.string.mi_testing_results:
+                openFragment(FragmentFactory.instance().newTaskInfoListFragment(Tasks.STATUS_DONE, true,
+                        new TaskInfoListFragment.OnTaskSelectedListener()
+                {
+                    @Override
+                    public void onSelected(Tasks task)
+                    {
+                        openFragment(FragmentFactory.instance().newTestResultFragment(task, new View.OnClickListener()
+                        {
+                            @Override
+                            public void onClick(View view)
+                            {
+                                activity.getSupportFragmentManager().popBackStack();
+                            }
+                        }));
+
+                    }
+                }));
                 break;
         }
         mDrawerLayout.closeDrawer(Gravity.START);

@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import northern.captain.app.WordsMemo.logic.Tags;
+import northern.captain.app.WordsMemo.logic.Users;
 
 /**
  * Copyright 2013 by Northern Captain Software
@@ -13,7 +14,7 @@ import northern.captain.app.WordsMemo.logic.Tags;
  * This code is a private property of its owner Northern Captain.
  * Any copying or redistribution of this source code is strictly prohibited.
  */
-public class UsersDB extends Tags implements ICRUD
+public class UsersDB extends Tags implements ICRUD, Users
 {
     public static final String DB_USER      = "_db_";
     public static final int    DB_USER_ID   = -1;

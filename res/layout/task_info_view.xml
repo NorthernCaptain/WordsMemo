@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" android:id="@+id/linearLayout">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/words_lbl"
+            android:id="@+id/task_info_textView"
+            android:layout_margin="5dp" android:layout_weight="1"/>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/task_info_spinner"
+            android:spinnerMode="dropdown"
+            android:entries="@array/scoresort_arr"
+            android:focusable="false" android:gravity="center_vertical" android:layout_margin="5dp"
+                />
+    </LinearLayout>
+    <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/task_info_list" android:layout_alignLeft="@+id/linearLayout"
+            android:layout_below="@+id/linearLayout"
+            android:choiceMode="singleChoice"
+            android:divider="@android:color/darker_gray"
+            android:dividerHeight="0.2dp"
+            android:background="@android:color/background_light" android:layout_gravity="top"/>
+            />
+
+</RelativeLayout>

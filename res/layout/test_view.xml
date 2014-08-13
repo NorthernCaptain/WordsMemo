@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ProgressBar
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:id="@+id/test_pbar"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_weight="2"
+        android:layout_height="0px"
+        android:background="@drawable/holorect"
+        android:layout_margin="3dp"
+        >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/test_word_web"
+        android:layout_margin="5dp"
+        android:background="@android:color/background_light"
+        android:gravity="center_vertical|center_horizontal"
+        android:clickable="true" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/workedit_translate"
+        android:id="@+id/test_translate_lbl"
+        android:textColor="@color/holoblue_dark"
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="5dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_weight="3"
+        android:layout_height="0px"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="3dp"
+        android:gravity="center"
+        android:background="@drawable/holorect"
+        android:id="@+id/test_lay"
+        >
+        <ScrollView
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_margin="3dp"
+                android:id="@+id/scrollView"
+                android:layout_gravity="center"
+                >
+            <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/test_choose_grp"
+                    android:layout_margin="5dp"
+                    android:clickable="true"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:orientation="vertical">
+                <RadioButton
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/test_choose_1"/>
+                <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1px"
+                        android:background="@color/holoblue_dark"
+                        android:layout_margin="5dp"
+                        />
+
+                <RadioButton
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/test_choose_2"/>
+                <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1px"
+                        android:background="@color/holoblue_dark"
+                        android:layout_margin="5dp"
+                        />
+                <RadioButton
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/test_choose_3"/>
+                <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1px"
+                        android:background="@color/holoblue_dark"
+                        android:layout_margin="5dp"
+                        />
+                <RadioButton
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/test_choose_4"/>
+            </RadioGroup>
+
+        </ScrollView>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:layout_gravity="bottom"
+        android:layout_margin="2dp">
+
+        <ImageButton
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/test_say_but"
+            android:src="@drawable/ic_action_volume_on"
+            android:padding="15dp"
+            android:contentDescription="@string/ok_lbl" />
+
+        <ImageButton
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/test_trans_but"
+            android:src="@drawable/ic_action_import_export"
+            android:padding="15dp"
+            android:contentDescription="@string/ok_lbl"
+            android:longClickable="true"/>
+
+        <ImageButton
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/test_back_but"
+            android:padding="15dp"
+            android:src="@drawable/ic_action_reply"
+            android:contentDescription="@string/ok_lbl"/>
+
+        <ImageButton
+            android:layout_width="0px"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:id="@+id/test_next_but"
+            android:src="@drawable/ic_action_forward"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:longClickable="true"
+            android:clickable="true"
+            android:contentDescription="@string/ok_lbl"
+            android:layout_gravity="right" />
+
+    </LinearLayout>
+
+</LinearLayout>

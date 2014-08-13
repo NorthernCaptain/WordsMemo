@@ -27,7 +27,7 @@ public class TrainingSession extends TrainingParams
 
     public void init()
     {
-        wordIdsFull = WordFactory.instance().getIdsByTags(this.tags);
+        wordIdsFull = WordFactory.instance().getIdsByTags(this.tagSet);
         currentIds.clear();
         currentIds.addAll(wordIdsFull);
         rnd = new Random();

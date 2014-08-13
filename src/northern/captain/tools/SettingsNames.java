@@ -14,4 +14,5 @@ public interface SettingsNames
     String IMPORT_FNAME = "importFName";
     String EXPORT_PATH = "exportPath";
     String WORD_EDIT_TAGS = "wordEditTags";
+    String USER_NAME = "userName";
 }

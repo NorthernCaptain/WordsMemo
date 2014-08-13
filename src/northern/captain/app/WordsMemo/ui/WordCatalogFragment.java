@@ -36,7 +36,7 @@ public class WordCatalogFragment extends Fragment
 
         setHasOptionsMenu(true);
 
-        items = WordFactory.instance().getWords();
+        reloadWords();
 
         listView = (ListView)v.findViewById(R.id.wordcat_list);
         listAdapter = new CustomListAdapter(AndroidContext.current.app, R.layout.wordcat_row);
@@ -140,7 +140,7 @@ public class WordCatalogFragment extends Fragment
     public void doDelete(Words words)
     {
         WordFactory.instance().delete(words);
-        items = WordFactory.instance().getWords();
+        reloadWords();
         listAdapter.notifyDataSetInvalidated();
     }
 

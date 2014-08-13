@@ -8,39 +8,17 @@ package northern.captain.app.WordsMemo.logic;
  * This code is a private property of its owner Northern Captain.
  * Any copying or redistribution of this source code is strictly prohibited.
  */
-public class Users
+public interface Users
 {
-    protected long id;
-    protected String name;
-    protected String comments;
+    public long getId();
 
-    public long getId()
-    {
-        return id;
-    }
+    public void setId(long id);
 
-    public void setId(long id)
-    {
-        this.id = id;
-    }
+    public String getName();
 
-    public String getName()
-    {
-        return name;
-    }
+    public void setName(String name);
 
-    public void setName(String name)
-    {
-        this.name = name;
-    }
+    public String getComments();
 
-    public String getComments()
-    {
-        return comments;
-    }
-
-    public void setComments(String comments)
-    {
-        this.comments = comments;
-    }
+    public void setComments(String comments);
 }

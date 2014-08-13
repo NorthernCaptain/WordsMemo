@@ -3,7 +3,9 @@ package northern.captain.tools;
 import android.text.Html;
 import android.text.Spanned;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Copyright 2013 by Northern Captain Software
@@ -89,4 +91,19 @@ public class StringUtils
 
     public static Spanned toTextHtmlH1(String text) { return Html.fromHtml("<h1>" + text + "</h1>");};
     public static Spanned toTextHtmlH2(String text) { return Html.fromHtml("<h2>" + text + "</h2>");};
+    public static Spanned toTextHtmlH3(String text) { return Html.fromHtml("<h3>" + text + "</h3>");};
+    public static Spanned toTextHtml(String text) { return Html.fromHtml(text);};
+
+    private static SimpleDateFormat dateTime = new SimpleDateFormat("dd MMM yyyy kk:mm");
+
+    public static String formatDateTime(Date date)
+    {
+        return dateTime.format(date);
+    }
+
+    public static String formatTimeSpent(long sec)
+    {
+
+        return String.format("%02d:%02d:%02d", sec/3600, (sec%3600)/60, sec % 60);
+    }
 }

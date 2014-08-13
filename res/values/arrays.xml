@@ -8,4 +8,8 @@
         <item>Txt</item>
         <item>Htm</item>
     </string-array>
+    <string-array name="scoresort_arr">
+        <item>Score</item>
+        <item>Date</item>
+    </string-array>
 </resources>

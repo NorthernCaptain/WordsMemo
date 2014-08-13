@@ -37,7 +37,7 @@ public class SQLManager
     private String passwd = "ecrypt";
 
     private static final String DB_NAME="words.db";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     private Helper helper;
 
@@ -65,8 +65,18 @@ public class SQLManager
         private static final String CRE_WORD_TAGS_INDEX2 =
                 "create index word_tags_idx2 on word_tags(tag_id)";
 
+        private static final String CRE_TASKS =
+                "create table tasks (id integer primary key, user_id integer references users(id), name text(64), "
+                +"start_date datetime, finish_date datetime, time_spent_sec integer default 0, "
+                +"words_total integer, words_passed integer default 0, words_error integer default 0, "
+                +"status integer default 0, tags text, task_type integer default 0, score integer default 0)";
 
+        private static final String CRE_TASK_DETAIL =
+                "create table task_detail (id integer primary key, task_id integer references tasks(id), "
+               +"word_id integer references words(id), status integer default 0)";
 
+        private static final String CRE_TASK_DETAIL_INDEX1 =
+                "create index task_detail_idx1 on task_detail(task_id)";
 
 
 
@@ -116,12 +126,25 @@ public class SQLManager
             db.execSQL(CRE_WORD_TAGS);
             db.execSQL(CRE_WORD_TAGS_INDEX1);
             db.execSQL(CRE_WORD_TAGS_INDEX2);
+            //version 2
+            db.execSQL(CRE_TASKS);
+            db.execSQL(CRE_TASK_DETAIL);
+            db.execSQL(CRE_TASK_DETAIL_INDEX1);
         }
 
         @Override
-        public void onUpgrade(SQLiteDatabase db, int i, int i2)
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
         {
             setPassword(db);
+
+            if(oldVersion == 1 && newVersion == 2)
+            {
+                //version 2
+                db.execSQL(CRE_TASKS);
+                db.execSQL(CRE_TASK_DETAIL);
+                db.execSQL(CRE_TASK_DETAIL_INDEX1);
+            }
+
         }
 
         @Override

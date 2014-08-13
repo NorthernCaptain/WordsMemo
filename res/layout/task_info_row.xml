@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/task_info_row_base"
+              android:minHeight="?android:attr/listPreferredItemHeightSmall">
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal">
+        <TextView
+                android:id="@+id/task_info_row_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="User name"
+                android:textColor="@android:color/primary_text_light"
+                android:textColorHighlight="@android:color/primary_text_dark"
+                android:paddingTop="6dp" android:paddingBottom="6dp" android:ellipsize="marquee">
+                </TextView>
+        <TextView
+                android:id="@+id/task_info_row_tags"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="Fruit, Drinks"
+                android:textColor="@color/holoblue_dark"
+                android:textSize="12sp"
+                android:ellipsize="marquee">
+        </TextView>
+        <TextView
+                android:id="@+id/task_info_row_info"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="Fruit, Drinks"
+                android:textColor="@color/holoblue_dark"
+                android:textSize="12sp"
+                android:ellipsize="marquee">
+        </TextView>
+        <TextView
+                android:id="@+id/task_info_row_date"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:gravity="center_vertical|left"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="Fruit, Drinks"
+                android:textColor="@color/holoblue_dark"
+                android:textSize="12sp"
+                android:ellipsize="marquee">
+        </TextView>
+
+    </LinearLayout>
+    <TextView
+            android:id="@+id/task_info_row_score"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:textSize="26sp"
+            android:gravity="center_vertical|right"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="1234"
+            android:textColor="@android:color/primary_text_light"
+            android:textColorHighlight="@android:color/primary_text_dark"
+            android:paddingTop="6dp" android:paddingBottom="6dp"
+            android:textStyle="bold">
+    </TextView>
+
+</LinearLayout>

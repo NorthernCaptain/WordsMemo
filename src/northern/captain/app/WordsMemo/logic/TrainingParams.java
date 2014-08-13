@@ -1,5 +1,7 @@
 package northern.captain.app.WordsMemo.logic;
 
+import java.util.List;
+
 /**
  * Copyright 2013 by Northern Captain Software
  * User: leo
@@ -12,9 +14,16 @@ public class TrainingParams
 {
     protected String name;
 
-    protected TagSet tags;
+    protected TagSet tagSet;
     protected boolean needTalk = false;
     protected String  mainLang;
+
+    public TrainingParams()
+    {
+        tagSet = new TagSet();
+    }
+
+    protected List<Long> initialWordIdList;
 
     protected boolean showThesaurus = false;
 
@@ -43,14 +52,14 @@ public class TrainingParams
         this.name = name;
     }
 
-    public TagSet getTags()
+    public TagSet getTagSet()
     {
-        return tags;
+        return tagSet;
     }
 
-    public void setTags(TagSet tags)
+    public void setTagSet(TagSet tags)
     {
-        this.tags = tags;
+        this.tagSet = tags;
     }
 
     public boolean isNeedTalk()
@@ -65,11 +74,21 @@ public class TrainingParams
 
     public String getMainLang()
     {
-        return mainLang;
+        return mainLang == null ? Words.LANG_EN : mainLang;
     }
 
     public void setMainLang(String mainLang)
     {
         this.mainLang = mainLang;
+    }
+
+    public List<Long> getInitialWordIdList()
+    {
+        return initialWordIdList;
+    }
+
+    public void setInitialWordIdList(List<Long> initialWordIdList)
+    {
+        this.initialWordIdList = initialWordIdList;
     }
 }

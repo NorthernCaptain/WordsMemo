@@ -158,29 +158,37 @@ public class TrainingFragment extends Fragment
             word = session.nextWord();
         }
 
+        isNameFirst = session.getMainLang().equals(word.getLang());
+
         setValues(word, false);
 
-        if(session.isNeedTalk())
+        if(session.isNeedTalk() && isNameFirst)
         {
             doSay();
         }
     }
 
-    private void setValues(Words word, boolean showTranslation)
+    protected boolean isNameFirst = true;
+
+    String getName(Words word)
     {
-        if(word == null)
-            return;
+        return isNameFirst ? getNameInternal(word) : getTranslationInternal(word);
+    }
 
-        wordView.setText(StringUtils.toTextHtmlH1(word.getName()));
+    private String getNameInternal(Words word)
+    {
+        return word.getName();
+    }
 
+    String getTranslation(Words word)
+    {
+        return !isNameFirst ? getNameInternal(word) : getTranslationInternal(word);
+    }
+
+    private String getTranslationInternal(Words word)
+    {
         String translation;
         int captionId;
-
-        if(!showTranslation)
-        {
-            transView.setText("");
-            return;
-        }
 
         boolean isHtml = false;
         if(session.isShowThesaurus())
@@ -207,8 +215,34 @@ public class TrainingFragment extends Fragment
             }
         }
 
+        return translation;
+    }
+
+    private void setValues(Words word, boolean showTranslation)
+    {
+        if(word == null)
+            return;
+
+        wordView.setText(StringUtils.toTextHtmlH1(getName(word)));
+
+        int captionId;
+
+        if(!showTranslation)
+        {
+            transView.setText("");
+            return;
+        }
+
+        if(session.isShowThesaurus())
+        {
+            captionId = R.string.workedit_thesaurus;
+        } else
+        {
+            captionId = R.string.workedit_translate;
+        }
+
         this.transLbl.setText(captionId);
 
-        transView.setText(StringUtils.toTextHtmlH2(translation));
+        transView.setText(StringUtils.toTextHtmlH2(getTranslation(word)));
     }
 }
