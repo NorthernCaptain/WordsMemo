@@ -9,10 +9,10 @@ import android.widget.*;
 import northern.captain.app.WordsMemo.AndroidContext;
 import northern.captain.app.WordsMemo.R;
 import northern.captain.app.WordsMemo.factory.TTSFactory;
-import northern.captain.app.WordsMemo.logic.TaskDetail;
-import northern.captain.app.WordsMemo.logic.Tasks;
-import northern.captain.app.WordsMemo.logic.Words;
+import northern.captain.app.WordsMemo.logic.*;
 import northern.captain.tools.StringUtils;
+
+import java.util.List;
 
 
 /**
@@ -23,8 +23,10 @@ public class TestingFragment extends Fragment
     protected TextView  wordView;
     protected TextView  transView;
     protected TextView transLbl;
+    protected TextView wrongPronounceLbl;
 
     protected ImageButton sayBut;
+    protected ImageButton micBut;
     protected ImageButton translateOrThesaurusBut;
     protected ImageButton backBut;
     protected ImageButton nextBut;
@@ -69,6 +71,7 @@ public class TestingFragment extends Fragment
             }
         });
         transLbl = (TextView) v.findViewById(R.id.test_translate_lbl);
+        wrongPronounceLbl = (TextView) v.findViewById(R.id.test_wrong_lbl);
         progressBar = (ProgressBar) v.findViewById(R.id.test_pbar);
         chooseResultGrp = (RadioGroup) v.findViewById(R.id.test_choose_grp);
         choose1Button = (RadioButton) v.findViewById(R.id.test_choose_1);
@@ -92,6 +95,15 @@ public class TestingFragment extends Fragment
             public void onClick(View view)
             {
                 doSay(isNameFirst);
+            }
+        });
+        micBut = (ImageButton) v.findViewById(R.id.test_mic_but);
+        micBut.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                doHear(isNameFirst);
             }
         });
         translateOrThesaurusBut = (ImageButton)v.findViewById(R.id.test_trans_but);
@@ -133,24 +145,6 @@ public class TestingFragment extends Fragment
             }
         });
 
-//        transView.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View view)
-//            {
-//                setValues(session.getCurrentWord(), true);
-//            }
-//        });
-
-//        View lay = v.findViewById(R.id.test_lay);
-//        lay.setOnClickListener(new View.OnClickListener()
-//        {
-//            @Override
-//            public void onClick(View view)
-//            {
-//                setValues(session.getCurrentWord(), true);
-//            }
-//        });
 
         progressBar.setMax(session.getWordsTotal());
 
@@ -168,6 +162,42 @@ public class TestingFragment extends Fragment
 
         TTSFactory.instance().saySomething(word.getName());
     }
+
+    private void doHear(boolean canHear)
+    {
+        Words word = session.getCurrentWord();
+        if(word == null || !canHear)
+            return;
+
+        VoiceRecognitionFactory.instance().getVoiceRec().startVoiceRecognition(voiceCallback, word.getName().trim());
+    }
+
+    private VoiceRecognitionProcessor.IVoiceCallback voiceCallback = new VoiceRecognitionProcessor.IVoiceCallback()
+    {
+        @Override
+        public void onResultOK(List<String> words)
+        {
+            String word = session.getCurrentWord().getName().trim().toLowerCase();
+
+            String youSaid = words.get(0).trim();
+            if(word.equals(youSaid.toLowerCase()))
+            {
+                TTSFactory.instance().saySomething("Ok, " + word);
+                wrongPronounceLbl.setText("");
+            }
+            else
+            {
+                TTSFactory.instance().saySomething("NO! You said " + youSaid);
+                wrongPronounceLbl.setText(youSaid);
+            }
+        }
+
+        @Override
+        public void onResultFail()
+        {
+            TTSFactory.instance().saySomething("No way!");
+        }
+    };
 
     private void switchThesaurus()
     {
@@ -249,6 +279,8 @@ public class TestingFragment extends Fragment
         {
             doSay(isNameFirst);
         }
+
+        wrongPronounceLbl.setText("");
     }
 
     private void setValues(Words word, boolean showTranslation)

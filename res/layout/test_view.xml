@@ -30,6 +30,11 @@
         android:gravity="center_vertical|center_horizontal"
         android:clickable="true" />
     </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -37,9 +42,20 @@
         android:text="@string/workedit_translate"
         android:id="@+id/test_translate_lbl"
         android:textColor="@color/holoblue_dark"
-        android:layout_marginTop="6dp"
         android:layout_marginLeft="5dp" />
 
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="fill_horizontal"
+            android:gravity="right"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/test_wrong_lbl"
+            android:textStyle="bold"
+            android:textColor="@color/my_red"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="5dp" />
+    </LinearLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -119,6 +135,15 @@
             android:src="@drawable/ic_action_volume_on"
             android:padding="15dp"
             android:contentDescription="@string/ok_lbl" />
+
+        <ImageButton
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:id="@+id/test_mic_but"
+                android:src="@drawable/ic_action_mic"
+                android:padding="15dp"
+                android:contentDescription="@string/ok_lbl" />
 
         <ImageButton
             android:layout_width="0px"

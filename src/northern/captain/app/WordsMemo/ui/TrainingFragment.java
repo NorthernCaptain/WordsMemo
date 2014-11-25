@@ -11,8 +11,12 @@ import northern.captain.app.WordsMemo.AndroidContext;
 import northern.captain.app.WordsMemo.R;
 import northern.captain.app.WordsMemo.factory.TTSFactory;
 import northern.captain.app.WordsMemo.logic.TrainingSession;
+import northern.captain.app.WordsMemo.logic.VoiceRecognitionFactory;
+import northern.captain.app.WordsMemo.logic.VoiceRecognitionProcessor;
 import northern.captain.app.WordsMemo.logic.Words;
 import northern.captain.tools.StringUtils;
+
+import java.util.List;
 
 
 /**
@@ -23,7 +27,9 @@ public class TrainingFragment extends Fragment
     protected TextView  wordView;
     protected TextView  transView;
     protected TextView transLbl;
+    protected TextView wrongPronounceLbl;
 
+    protected ImageButton micBut;
     protected ImageButton sayBut;
     protected ImageButton translateOrThesaurusBut;
     protected ImageButton backBut;
@@ -52,6 +58,7 @@ public class TrainingFragment extends Fragment
         });
         transView = (TextView) v.findViewById(R.id.training_translate_web);
         transLbl = (TextView) v.findViewById(R.id.training_translate_lbl);
+        wrongPronounceLbl = (TextView) v.findViewById(R.id.training_wrong_lbl);
 
         sayBut = (ImageButton) v.findViewById(R.id.training_say_but);
         sayBut.setOnClickListener(new View.OnClickListener()
@@ -62,6 +69,16 @@ public class TrainingFragment extends Fragment
                 doSay();
             }
         });
+        micBut = (ImageButton) v.findViewById(R.id.training_mic_but);
+        micBut.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                doHear(isNameFirst);
+            }
+        });
+
         translateOrThesaurusBut = (ImageButton)v.findViewById(R.id.training_trans_but);
         translateOrThesaurusBut.setOnClickListener(new View.OnClickListener()
         {
@@ -136,6 +153,15 @@ public class TrainingFragment extends Fragment
         TTSFactory.instance().saySomething(word.getName());
     }
 
+    private void doHear(boolean canHear)
+    {
+        Words word = session.getCurrentWord();
+        if(word == null || !canHear)
+            return;
+
+        VoiceRecognitionFactory.instance().getVoiceRec().startVoiceRecognition(voiceCallback, word.getName().trim());
+    }
+
     private void switchThesaurus()
     {
         session.setShowThesaurus(!session.isShowThesaurus());
@@ -167,6 +193,35 @@ public class TrainingFragment extends Fragment
             doSay();
         }
     }
+
+    private VoiceRecognitionProcessor.IVoiceCallback voiceCallback = new VoiceRecognitionProcessor.IVoiceCallback()
+    {
+        @Override
+        public void onResultOK(List<String> words)
+        {
+            String word = session.getCurrentWord().getName().trim().toLowerCase();
+
+            String youSaid = words.get(0).trim();
+            if(word.equals(youSaid.toLowerCase()))
+            {
+                TTSFactory.instance().saySomething("Ok, " + word);
+                wrongPronounceLbl.setText("");
+            }
+            else
+            {
+                TTSFactory.instance().saySomething("NO! You said " + youSaid);
+                wrongPronounceLbl.setText(youSaid);
+            }
+        }
+
+        @Override
+        public void onResultFail()
+        {
+            TTSFactory.instance().saySomething("No way!");
+        }
+    };
+
+
 
     protected boolean isNameFirst = true;
 
@@ -222,6 +277,8 @@ public class TrainingFragment extends Fragment
     {
         if(word == null)
             return;
+
+        wrongPronounceLbl.setText("");
 
         wordView.setText(StringUtils.toTextHtmlH1(getName(word)));
 
