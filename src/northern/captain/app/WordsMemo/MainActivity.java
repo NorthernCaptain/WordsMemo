@@ -1,5 +1,6 @@
 package northern.captain.app.WordsMemo;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,8 +12,12 @@ import northern.captain.app.WordsMemo.db.SQLManager;
 import northern.captain.app.WordsMemo.factory.*;
 import northern.captain.app.WordsMemo.ui.FragmentFactory;
 import northern.captain.app.WordsMemo.ui.NavDrawer;
+import northern.captain.tools.IActivityResultCallback;
 import northern.captain.tools.MyToast;
 import northern.captain.tools.Settings;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends ActionBarActivity
 {
@@ -202,5 +207,29 @@ public class MainActivity extends ActionBarActivity
     public DrawerLayout getmDrawerLayout()
     {
         return mDrawerLayout;
+    }
+
+
+
+    private Map<Integer, IActivityResultCallback> activityResultCallbackMap = new HashMap<Integer, IActivityResultCallback>();
+
+    public void addOnActivityCallback(int code, IActivityResultCallback callback)
+    {
+        activityResultCallbackMap.put(code, callback);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        IActivityResultCallback callback = activityResultCallbackMap.get(requestCode);
+        if(callback != null)
+        {
+            boolean ret = callback.onActivityResult(requestCode, resultCode, data);
+            if(!ret)
+            {
+                activityResultCallbackMap.remove(callback);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
